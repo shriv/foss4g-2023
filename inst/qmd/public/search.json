@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Understanding cities with open source tools and open data",
+    "section": "",
+    "text": "1 Introduction"
+  },
+  {
+    "objectID": "pois.html#pois-flavour-the-city",
+    "href": "pois.html#pois-flavour-the-city",
+    "title": "2  POIs",
+    "section": "2.1 POIs flavour the city",
+    "text": "2.1 POIs flavour the city\nIn larger cities POIs describe the flavour of a neighbourhood through their character and distribution. Tourists (from the city or elsewhere) visit these areas for specific experiences or vibe - for example, a theatre and dining experience in the thespian cluster at the West End of London.\nIn a city like Wellington, POIs are tightly clustered in the city centre and across a select few “high streets” of higher density suburbs like Newtown, Miramar, Karori and Johnsonville that act like satellite hubs. Unlike the frothing, spicy, tumultuous flavours of Mumbai, the flavour of Wellington is more of a simmering broth with a strong depth of flavour from the tightly clustered, amenity-rich city centre and sudden, deep bursts of flavour as we explore the surrounding suburbs."
+  },
+  {
+    "objectID": "pois.html#exploring-pois",
+    "href": "pois.html#exploring-pois",
+    "title": "2  POIs",
+    "section": "2.2 Exploring POIs",
+    "text": "2.2 Exploring POIs\nDepending on the city of interest, POI data may be plentiful, scarce or patchy. For many countries and cities, OpenStreetMap (OSM) offers a query-able data repository of POI information. For example, a simple query below to get cafes in Wellington, NZ.\n\n# load packages\nlibrary(dplyr)\nlibrary(osmdata)\nlibrary(sf)\n\n# get point location data of cafes\nwgtn_cafes &lt;- opq(bbox = 'wellington city') |&gt; \n    add_osm_feature(key = 'amenity', value = 'cafe') |&gt; \n  osmdata_sf()\n\nwgtn_cafes &lt;- wgtn_cafes$osm_points\n\n\n# load plotting library\nlibrary(tmap)\n\n# plot cafe locations on interactive map\ntmap_mode(\"view\")\ntm_shape(wgtn_cafes) + \n  tm_dots()\n\n\n\n\n\nFigure 2.1: Interactive map of cafes in Wellington. All the OSM attributes associated with cafes can be accessed by hovering and clicking on a given cafe location. Note, almost all of attributes are generally not filled in.\n\n\n\nSome countries and cities manage their own POI datasets. For example, the UK sells a POI dataset updated multiple times a year while France maintains an open POI database that is updated annually. New Zealand doesn’t have an official source of POI data, OSM can be reasonably accurate for longer standing businesses or regularly updated by dedicated maintainers in some areas (perhaps this could be you!).\nThe biggest challenge for POI information is in developing countries where the Google Places API is the only possible data source. Unfortunately, Google Places API restricts results (max of 60 as at 2023) and starts charging after a certain number of queries. It’s possible that Fourquare API is better but realistically neither APIs will capture the street vendors or smaller food joints that have opened only recently. The dynamism and vitality of developing country cities will not be reflected in the datasets currently available."
+  },
+  {
+    "objectID": "pois.html#understanding-cities-with-pois",
+    "href": "pois.html#understanding-cities-with-pois",
+    "title": "2  POIs",
+    "section": "2.3 Understanding cities with POIs",
+    "text": "2.3 Understanding cities with POIs\nDaily life amenities like schools, cafes, supermarkets, medical centres play a strong role in our perceptions of neighbourhoods to live in. While individuals have their own rubrics for choosing between myriad aspects of a neighbourhood amenity access, job opportunities, transport access and house prices, there are strong correlations between all these aspects that can drive general trends in cities. For example, a recent study by Zhang and Pfoser [3] found that just the density of cafes has a strong correlation with house prices.\n\n\n\nStrong correlation between coffee shop density and real estate prices in New York City. Pick your mortgage debt based on your coffee addiction! [3]\n\n\nAnother example from Luo et al. [4] shows how a collection of POIs in a city can be summarised to describe areas by functionality.\n\n\n\n\n\n\nPOIs in Nanning.\n\n\n\n\n\n\n\nClassifying urban areas based on POIs."
+  },
+  {
+    "objectID": "pois.html#learning-tips",
+    "href": "pois.html#learning-tips",
+    "title": "2  POIs",
+    "section": "2.4 Learning tips",
+    "text": "2.4 Learning tips\nThe first step to building understanding of a city with POIs is learning how to obtain and work with the data. POIs are points, the easiest type of spatial data to work with, so they are a great starting place for your journey in urban data science. My own journey began with POIs for some potential client work on value derived from the placement of fuel stations in Wellington.\nPackages like osmdata in R or pyrosm in Python are great places to start. Note, if you want to download a LOT of POIs in R then getting a bulk download of all OSM data for your city with osmextract might be an easier way to go."
+  },
+  {
+    "objectID": "pois.html#learning-resources",
+    "href": "pois.html#learning-resources",
+    "title": "2  POIs",
+    "section": "2.5 Learning resources",
+    "text": "2.5 Learning resources\n\nGetting OSM data with osmdata package in R\nGetting OSM data with pyrosm in Python\nBulk download of all OSM data for your city with osmextract in R\n\n\n\n\n\n[1] yuvaonline, “India’s largest planned city and its unplanned slums,” Oct. 12, 2022. https://medium.com/@yuvaonline/indias-largest-planned-city-and-its-unplanned-slums-17291e1ead8d (accessed Sep. 18, 2023).\n\n\n[2] T. Antonopoulos, “Prototyping informality: Mass housing as urban villages in Navi Mumbai.” \n\n\n[3] L. Zhang and D. Pfoser, “Using OpenStreetMap point-of-interest data to model urban change—A feasibility study,” PLoS One, vol. 14, no. 2, p. e0212606, Feb. 2019, doi: 10.1371/journal.pone.0212606.\n\n\n[4] G. Luo, J. Ye, J. Wang, and Y. Wei, “Urban Functional Zone Classification Based on POI Data and Machine Learning,” Sustainability, vol. 15, no. 5, 5, p. 4631, Jan. 2023, doi: 10.3390/su15054631."
+  },
+  {
+    "objectID": "street_networks.html#street-networks-to-navigate-the-city",
+    "href": "street_networks.html#street-networks-to-navigate-the-city",
+    "title": "3  Street networks",
+    "section": "3.1 Street networks to navigate the city",
+    "text": "3.1 Street networks to navigate the city"
+  },
+  {
+    "objectID": "buildings.html#buildings-anchor-the-city",
+    "href": "buildings.html#buildings-anchor-the-city",
+    "title": "4  Buildings",
+    "section": "4.1 Buildings anchor the city",
+    "text": "4.1 Buildings anchor the city"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "[1] T.\nAntonopoulos, “Prototyping informality: Mass housing\nas urban villages in Navi Mumbai.” \n\n\n[2] L.\nZhang and D. Pfoser, “Using OpenStreetMap\npoint-of-interest data to model urban change—A feasibility\nstudy,” PLoS One, vol. 14, no. 2, p. e0212606, Feb.\n2019, doi: 10.1371/journal.pone.0212606.\n\n\n[3] yuvaonline, “India’s largest planned city\nand its unplanned slums,” Oct. 12, 2022. https://medium.com/@yuvaonline/indias-largest-planned-city-and-its-unplanned-slums-17291e1ead8d\n(accessed Sep. 18, 2023).\n\n\n[4] G.\nLuo, J. Ye, J. Wang, and Y. Wei, “Urban Functional Zone\nClassification Based on POI Data and Machine\nLearning,” Sustainability, vol. 15, no. 5, 5, p.\n4631, Jan. 2023, doi: 10.3390/su15054631."
+  }
+]

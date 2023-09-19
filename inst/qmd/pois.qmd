@@ -1,0 +1,133 @@
+# POIs
+
+::: {.callout-note}
+A Point of Interest (POI) is a specific point location, or useful site, defined mainly by its geographical coordinates (longitude and latitude). It refers to a place or destination of potential interest. Depending on the type of POI, it can also be referred as a _facility_ or _amenity_. 
+:::
+
+```{r}
+#| include: false
+library(osmdata)
+library(sf)
+library(dplyr)
+library(tmap)
+library(ggplot2)
+library(ggsn)
+library(googleway)
+library(config)
+```
+
+I grew up in Vashi, originally conceived as a release valve from the bursting island metropolis of Mumbai (also known as Bombay). Vashi was to be part of a nearby series of satellite townships that would provide affordable housing _".. especially for economically weaker sections, low-income groups and industrial labour"_ @yuvaonlineIndiaLargestPlanned2022. Unfortunately, this spillover area, known collectively as Navi Mumbai, features little of the intended ideology and planning @antonopoulosPrototypingInformalityMass. It features the similar rampant organic urbanism seen in the original island city of Mumbai - well to-do towers and gated communities amidst a mileu of middle-class housing and squat but dense settlements ranging from formal to semi-formal.   
+
+<!-- Connection of well-todo and poor with the above paragraph -->
+The housing society where I grew up was a tranquil oasis of townhouses but across the road was a teeming boil of social and economic activity. A jumbled cluster of semi-informal buildings with shop fronts sticking cheek by jowl next to each other. Shops would casually expand their wares out onto the pavement and in the evenings, street vendors set up their portable stalls on any remaining patch of pavement, calling out regularly in nasal staccato voices. 
+
+```{r}
+#| output: false
+# Get streetview images from Google
+# Latitude and longitude can be obtained from Google URL
+# Use the compass mark to estimate a heading value
+# A heading of 0 / 360 = North; 180 = South; 90 = East; 270 = West
+# FOV notes the zoom level
+# TODO Convert to function
+if (!file.exists("./assets/sector-17.jpeg")){
+  url <- google_streetview(location = c(19.0717768,73.00001),
+                    size = c(400,400),
+                    panorama_id = NULL,
+                    output = "html",
+                    heading = 355,
+                    fov =90,
+                    pitch = 5,
+                    response_check = FALSE,
+                    key = key)
+  
+  download.file(url, "./assets/sector-17.jpeg", model="wb")  
+}
+```
+::: {layout-ncol=2}
+
+![Railway colony. A tranquil housing society of townhouses in Navi Mumbai suburbs.](./assets/railway-colony.jpeg)
+
+![Jumble of squat buildings with a continuous array of shops opposite the colony.](./assets/railway-colony-opp-2.jpeg)
+
+:::
+
+My early memories of cities are urbanscapes with dramatic fluctuations in typology, where a hop across the road takes you from a tranquil, spacious housing society to narrow lanes and highly dense collisions of commerce and household life. This urban drama typifies many developing world towns and cities. 
+
+Amenities crop up along informal housing as well as well-established apartment buildings in a dizzying array of sizes and flavours in tight, constrained spaces - offering everything from a nursing home, an evening hawker selling roasted nuts, whose entire store is strapped to his front, to a plywood store with a glamorous updo of air conditioning and glossy surfaces. Further into the building you can find other businesses tucked away - tuition centres, hair salons and boutiques taking advantage of the quieter solitude of the building atrium. 
+
+::: {layout-ncol=2}
+
+![Shopfronts of an informal housing cluster.](./assets/railway-colony-opp.jpeg)
+
+![Myriad shops under large residential complexes.](./assets/sector-17.jpeg)
+:::
+
+## POIs flavour the city
+In larger cities POIs describe the flavour of a neighbourhood through their character and distribution. Tourists (from the city or elsewhere) visit these areas for specific experiences or vibe - for example, a theatre and dining experience in the thespian cluster at the West End of London. 
+
+In a city like Wellington, POIs are tightly clustered in the city centre and across a select few "high streets" of higher density suburbs like Newtown, Miramar, Karori and Johnsonville that act like satellite hubs. Unlike the frothing, spicy, tumultuous flavours of Mumbai, the flavour of Wellington is more of a simmering broth with a strong depth of flavour from the tightly clustered, amenity-rich city centre and sudden, deep bursts of flavour as we explore the surrounding suburbs. 
+
+## Exploring POIs
+Depending on the city of interest, POI data may be plentiful, scarce or patchy. For many countries and cities, [OpenStreetMap (OSM)](https://www.openstreetmap.org/#map=20/-41.28925/174.76265&layers=H) offers a query-able data repository of POI information. For example, a simple query below to get cafes in Wellington, NZ. 
+
+```{r}
+#| echo: true
+# load packages
+library(dplyr)
+library(osmdata)
+library(sf)
+
+# get point location data of cafes
+wgtn_cafes <- opq(bbox = 'wellington city') |> 
+    add_osm_feature(key = 'amenity', value = 'cafe') |> 
+  osmdata_sf()
+
+wgtn_cafes <- wgtn_cafes$osm_points
+```
+
+```{r}
+#| echo: true
+#| label: fig-interactive-cafes
+#| fig-cap: Interactive map of cafes in Wellington. All the OSM attributes associated with cafes can be accessed by hovering and clicking on a given cafe location. Note, almost all of attributes are generally not filled in. 
+ 
+# load plotting library
+library(tmap)
+
+# plot cafe locations on interactive map
+tmap_mode("view")
+tm_shape(wgtn_cafes) + 
+  tm_dots()
+```
+
+
+Some countries and cities manage their own POI datasets. For example, the [UK sells a POI dataset updated multiple times a year](https://www.data.gov.uk/dataset/215b3b26-9332-4091-9fa9-26aa66d30b87/points-of-interest) while [France maintains an open POI database](https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/) that is updated annually. New Zealand doesn't have an official source of POI data, OSM can be reasonably accurate for longer standing businesses or regularly updated by dedicated maintainers in some areas (perhaps this could be you!). 
+
+The biggest challenge for POI information is in developing countries where the Google Places API is the only possible data source. Unfortunately, [Google Places API restricts results (max of 60 as at 2023)](https://github.com/eduardotaveiga/Google-Maps-Nearby-Places) and starts charging after a certain number of queries. It's possible that Fourquare API is better but realistically neither APIs will capture the street vendors or smaller food joints that have opened only recently. The dynamism and vitality of developing country cities will not be reflected in the datasets currently available. 
+
+
+## Understanding cities with POIs
+Daily life amenities like schools, cafes, supermarkets, medical centres play a strong role in our perceptions of neighbourhoods to live in. While individuals have their own rubrics for choosing between myriad aspects of a neighbourhood amenity access, job opportunities, transport access and house prices, there are strong correlations between all these aspects that can drive general trends in cities. For example, a recent study by Zhang and Pfoser @zhangUsingOpenStreetMapPointofinterest2019 found that just the density of cafes has a strong correlation with house prices. 
+
+![Strong correlation between coffee shop density and real estate prices in New York City. Pick your mortgage debt based on your coffee addiction! @zhangUsingOpenStreetMapPointofinterest2019](./assets/pois-coffee-shops-real-estate-prices.png)
+
+Another example from Luo et al. @luoUrbanFunctionalZone2023 shows how a collection of POIs in a city can be summarised to describe areas by functionality. 
+
+::: {layout-ncol=2}
+
+![POIs in Nanning.](./assets/pois-nanning.png)
+
+![Classifying urban areas based on POIs.](./assets/area-classification-nanning.png)
+
+:::
+
+
+## Learning tips
+The first step to building understanding of a city with POIs is learning how to obtain and work with the data. POIs are points, the easiest type of spatial data to work with, so they are a great starting place for your journey in urban data science. [My own journey began with POIs](https://shriv-portfolio.netlify.app/post/fuel-station-1/) for some potential client work on value derived from the placement of fuel stations in Wellington. 
+
+Packages like [`osmdata` in R](https://cran.r-project.org/web/packages/osmdata/vignettes/osmdata.html) or [`pyrosm` in Python](https://pyrosm.readthedocs.io/en/latest/basics.html#read-points-of-interest) are great places to start. Note, if you want to download a LOT of POIs in R then getting a [bulk download of all OSM data for your city with `osmextract` might be an easier way to go](https://cran.r-project.org/web/packages/osmextract/vignettes/osmextract.html). 
+
+
+## Learning resources
+- [Getting OSM data with `osmdata` package in R](https://cran.r-project.org/web/packages/osmdata/vignettes/osmdata.html)
+- [Getting OSM data with `pyrosm` in Python](https://pyrosm.readthedocs.io/en/latest/basics.html#read-points-of-interest)
+-  [Bulk download of all OSM data for your city with `osmextract` in R](https://cran.r-project.org/web/packages/osmextract/vignettes/osmextract.html)
