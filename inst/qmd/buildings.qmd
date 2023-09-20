@@ -1,4 +1,28 @@
 
 # Buildings
+While the neighbourhood I grew up in was a tumultuous jumble of urban form, the enclaves of "old Bombay" are entire worlds apart. The charming tree-lined neighbourhoods in South Bombay areas like Colaba or Parsi Colony in Dadar are like an elegant old lady, sagging and covered in liver-spots, but her charm and beauty still take your breath away. 
+
+::: {layout-ncol=2}
+
+![Parsi colony.](./assets/parsi-colony.jpeg)
+
+![Badhwar Park.](./assets/badhwar-park.jpeg)
+:::
+
+Like any city in India (and perhaps more so), Mumbai is a city of contradictions and contrast. The razzle dazzle of Bollywood make it the city of dreams but the vast droves of rural migrant workers living in terrible conditions also make it the city of inequality. 
+
+> India loves to contradict itself on everything and anything... Every stereotype you know of India is completely true. At the same time the stereotypes are being broken all the time. 
+> Love is forbidden but romance is blossoming. India is poor, but it is a land of luxury. It has blazing hot summers and snows in the winter. It has the most barren deserts and the lushest jungles...
+
+- _Peter Claridge_ from the Chennai Expat Guide @claridgeChennaiExpatGuide2018
+
+Despite a slum population of around 42% @MumbaiGreaterMumbai2011, the ingenuity of the people living in these areas surpasses most of our expectations. Slums are economic powerhouses where no task is too small. For example, the recycling of hair waste to wigs and hair extensions is a multi-million dollar industry that employs a vast segment of entrepreneurial individuals and businesses from ragpickers (collecting discarded hair from the streets) to local waste collection depots to wig artisans @doronWasteNationGarbage2018. 
+
+::: {layout-ncol=2}
+![Shivaji Nagar.](./assets/shivaji-nagar.jpeg)
+
+![Mankhurd.](./assets/mankhurd.jpeg)
+:::
 
 ## Buildings anchor the city
+

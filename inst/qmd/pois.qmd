@@ -16,31 +16,34 @@ library(googleway)
 library(config)
 ```
 
-I grew up in Vashi, originally conceived as a release valve from the bursting island metropolis of Mumbai (also known as Bombay). Vashi was to be part of a nearby series of satellite townships that would provide affordable housing _".. especially for economically weaker sections, low-income groups and industrial labour"_ @yuvaonlineIndiaLargestPlanned2022. Unfortunately, this spillover area, known collectively as Navi Mumbai, features little of the intended ideology and planning @antonopoulosPrototypingInformalityMass. It features the similar rampant organic urbanism seen in the original island city of Mumbai - well to-do towers and gated communities amidst a mileu of middle-class housing and squat but dense settlements ranging from formal to semi-formal.   
+I grew up in Vashi, originally conceived as a release valve from the bursting island metropolis of Mumbai (also known as Bombay). Vashi was to be part of a nearby series of satellite townships that would provide affordable housing _".. especially for economically weaker sections, low-income groups and industrial labour"_ @yuvaonlineIndiaLargestPlanned2022. Unfortunately, this spillover area, known collectively as Navi Mumbai, features little of the intended ideology and planning @antonopoulosPrototypingInformalityMass. Instead, it repeats the rampant organic urbanism seen in Mumbai - that of well to-do towers and gated communities amidst a mileu of middle-class housing and squat but dense settlements ranging from the semi-formal buildings to informal huts and shelters.   
 
 <!-- Connection of well-todo and poor with the above paragraph -->
-The housing society where I grew up was a tranquil oasis of townhouses but across the road was a teeming boil of social and economic activity. A jumbled cluster of semi-informal buildings with shop fronts sticking cheek by jowl next to each other. Shops would casually expand their wares out onto the pavement and in the evenings, street vendors set up their portable stalls on any remaining patch of pavement, calling out regularly in nasal staccato voices. 
+The housing society where I grew up was a tranquil oasis of townhouses but across the road was a teeming boil of social and economic activity. A jumbled cluster of semi-formal buildings with shop fronts sticking cheek by jowl next to each other. Shops would casually expand their wares out onto the pavement and in the evenings, street vendors set up their portable stalls on any remaining patch of pavement, calling out regularly in nasal staccato voices. 
 
 ```{r}
 #| output: false
+# Get API key from config file
+key <- config::get("key")
+
 # Get streetview images from Google
 # Latitude and longitude can be obtained from Google URL
 # Use the compass mark to estimate a heading value
 # A heading of 0 / 360 = North; 180 = South; 90 = East; 270 = West
 # FOV notes the zoom level
 # TODO Convert to function
-if (!file.exists("./assets/sector-17.jpeg")){
-  url <- google_streetview(location = c(19.0717768,73.00001),
+if (!file.exists("./assets/mankhurd.jpeg")){
+  url <- google_streetview(location = c(19.0497003,72.9384668),
                     size = c(400,400),
                     panorama_id = NULL,
                     output = "html",
-                    heading = 355,
+                    heading = 180,
                     fov =90,
                     pitch = 5,
                     response_check = FALSE,
                     key = key)
   
-  download.file(url, "./assets/sector-17.jpeg", model="wb")  
+  download.file(url, "./assets/mankhurd.jpeg", model="wb")  
 }
 ```
 ::: {layout-ncol=2}
@@ -53,7 +56,7 @@ if (!file.exists("./assets/sector-17.jpeg")){
 
 My early memories of cities are urbanscapes with dramatic fluctuations in typology, where a hop across the road takes you from a tranquil, spacious housing society to narrow lanes and highly dense collisions of commerce and household life. This urban drama typifies many developing world towns and cities. 
 
-Amenities crop up along informal housing as well as well-established apartment buildings in a dizzying array of sizes and flavours in tight, constrained spaces - offering everything from a nursing home, an evening hawker selling roasted nuts, whose entire store is strapped to his front, to a plywood store with a glamorous updo of air conditioning and glossy surfaces. Further into the building you can find other businesses tucked away - tuition centres, hair salons and boutiques taking advantage of the quieter solitude of the building atrium. 
+The dynamism of cities like Mumbai lies in the dizzying array of amenities cropping up along informal housing as well as established apartment buildings - offering everything from a nursing home, an evening hawker selling roasted nuts, whose entire store is strapped to his front, to a plywood store with a glamorous updo of air conditioning and glossy surfaces. The facilities aren't restricted to the street fronts. Further into larger buildings, you can find other businesses tucked away - tuition centres, hair salons and boutiques taking advantage of the quieter solitude of the building atrium. 
 
 ::: {layout-ncol=2}
 
@@ -63,7 +66,7 @@ Amenities crop up along informal housing as well as well-established apartment b
 :::
 
 ## POIs flavour the city
-In larger cities POIs describe the flavour of a neighbourhood through their character and distribution. Tourists (from the city or elsewhere) visit these areas for specific experiences or vibe - for example, a theatre and dining experience in the thespian cluster at the West End of London. 
+In larger cities POIs, describe the flavour of a neighbourhood through their character and distribution. Tourists (from the city or elsewhere) visit these areas for specific experiences or vibe - for example, a theatre and dining experience in the thespian cluster at the West End of London. 
 
 In a city like Wellington, POIs are tightly clustered in the city centre and across a select few "high streets" of higher density suburbs like Newtown, Miramar, Karori and Johnsonville that act like satellite hubs. Unlike the frothing, spicy, tumultuous flavours of Mumbai, the flavour of Wellington is more of a simmering broth with a strong depth of flavour from the tightly clustered, amenity-rich city centre and sudden, deep bursts of flavour as we explore the surrounding suburbs. 
 
