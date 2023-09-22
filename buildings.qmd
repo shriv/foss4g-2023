@@ -37,7 +37,7 @@ library(dplyr)
 library(sf)
 library(osmdata)
 library(osmplotr)
-source("../../R/centroid_bbox.R")
+source("R/centroid_bbox.R")
 
 akl_bbox <- get_centroid_bounding_box(
   c("lat" = -36.85494696219434, "lng" = 174.76040843528585),
@@ -85,7 +85,7 @@ library(sf)
 
 # get buildings from LINZ export
 # https://data.linz.govt.nz/layer/101290-nz-building-outlines/
-akl_bldgs <- st_read("../extdata/lds-nz-building-outlines-SHP/")
+akl_bldgs <- st_read("extdata/lds-nz-building-outlines-SHP/")
 ```
 
 ```{r}
@@ -128,8 +128,7 @@ library(ggplot2)
 library(patchwork)
 library(osmplotr)
 library(ggsn)
-source("../../R/centroid_bbox.R")
-source("../../R/return_poche_map.R")
+source("R/return_poche_map.R")
 ```
 
 
