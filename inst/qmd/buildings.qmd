@@ -1,6 +1,6 @@
 
 # Buildings
-While the neighbourhood I grew up in was a tumultuous jumble of urban form, the enclaves of "old Bombay" are entire worlds apart. The charming tree-lined neighbourhoods in South Bombay areas like Colaba or Parsi Colony in Dadar are like an elegant old lady, sagging and covered in liver-spots, but her charm and beauty still take your breath away. 
+While the neighbourhood I grew up in was a tumultuous jumble of urban form, the enclaves of "old Bombay" are worlds apart. The ornate buildings in the tree-lined neighbourhoods of South Bombay areas like Colaba or, Parsi Colony in Dadar are like an elegant elderly lady, sagging and covered in liver-spots, but her charm and beauty still take your breath away. 
 
 ::: {layout-ncol=2}
 
@@ -9,14 +9,14 @@ While the neighbourhood I grew up in was a tumultuous jumble of urban form, the 
 ![Badhwar Park.](./assets/badhwar-park.jpeg)
 :::
 
-Like any city in India (and perhaps more so), Mumbai is a city of contradictions and contrast. The razzle dazzle of Bollywood make it the city of dreams but the vast droves of rural migrant workers living in terrible conditions also make it the city of inequality. 
+Like any city in India (and perhaps more so), Mumbai is a city of contradictions and contrast. The razzle dazzle of Bollywood make it the city of dreams but the vast droves of rural migrant workers living in slums also make it the city of inequality. 
 
-> India loves to contradict itself on everything and anything... Every stereotype you know of India is completely true. At the same time the stereotypes are being broken all the time. 
+> India loves to contradict itself on everything and anything. [...] Every stereotype you know of India is completely true. At the same time the stereotypes are being broken all the time. 
 > Love is forbidden but romance is blossoming. India is poor, but it is a land of luxury. It has blazing hot summers and snows in the winter. It has the most barren deserts and the lushest jungles...
 
 - _Peter Claridge_ from the Chennai Expat Guide @claridgeChennaiExpatGuide2018
 
-Despite a slum population of around 42% @MumbaiGreaterMumbai2011, the ingenuity of the people living in these areas surpasses most of our expectations. Slums are economic powerhouses where no task is too small. For example, the recycling of hair waste to wigs and hair extensions is a multi-million dollar industry that employs a vast segment of entrepreneurial individuals and businesses from ragpickers (collecting discarded hair from the streets) to local waste collection depots to wig artisans @doronWasteNationGarbage2018. 
+Despite a substantial slum population (last calculated ~42% in 2011 @MumbaiGreaterMumbai2011), the ingenuity of the people living in these areas exceeds imagination. Facilitated by the cheek-by-jowl proximity of labour and business, slums are economic powerhouses where no task is too small. For example, the recycling of hair waste to wigs and hair extensions is a multi-million dollar industry that employs a vast segment of entrepreneurial individuals and businesses from ragpickers (collecting discarded hair from the streets) to local waste collection depots and wig artisans @doronWasteNationGarbage2018. 
 
 ::: {layout-ncol=2}
 ![Shivaji Nagar.](./assets/shivaji-nagar.jpeg)
@@ -24,5 +24,167 @@ Despite a slum population of around 42% @MumbaiGreaterMumbai2011, the ingenuity 
 ![Mankhurd.](./assets/mankhurd.jpeg)
 :::
 
-## Buildings anchor the city
 
+## Buildings anchor the city
+Buildings anchor urban form and their spread and style also dictate the aesthetics. This is even more the case for urban areas with a large number of informal dwellings (independent or as part of a slum cluster). Within slums, buildings dictate movement more than street networks via narrow alleys (“gullies” in Mumbai parlance) rather than formally managed and designed streets. 
+
+## Getting building data
+The R package `osmdata` can be used to query for building polygons in a small area. A helper function is used to simplify the generation of a bounding box around a central point. The quality of OSM in New Zealand is very high since LINZ manages regular uploads through their process of deriving outlines from satellite imagery. 
+
+```{r}
+# load packages
+library(dplyr)
+library(sf)
+library(osmdata)
+library(osmplotr)
+source("../../R/centroid_bbox.R")
+
+akl_bbox <- get_centroid_bounding_box(
+  c("lat" = -36.85494696219434, "lng" = 174.76040843528585),
+  distance = 1000,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+akl_bldgs_osm <- opq(akl_bbox) %>%
+  add_osm_feature("building") %>% 
+  osmdata_sf()
+
+akl_bldgs_osm_poly <- bind_rows(
+  akl_bldgs_osm$osm_polygons,
+  akl_bldgs_osm$osm_multipolygons
+) %>% 
+  st_make_valid()
+```
+
+
+```{r}
+#| echo: true
+#| label: fig-interactive-bldgs
+#| fig-cap: Interactive map of buildings in Central Auckland. OSM attributes associated with buildings can be accessed by hovering and clicking on a given building polygon though most attributes are generally not filled in. 
+ 
+# load plotting library
+library(tmap)
+tmap_options(check.and.fix = TRUE)
+
+# plot cafe locations on interactive map
+tmap_mode("view")
+tm_shape(akl_bldgs_osm_poly) + 
+  tm_polygons()
+```
+
+Querying building data for a large area from OSM is not performant. For larger scale analyses, [LINZ has building outlines](https://data.linz.govt.nz/layer/101290-nz-building-outlines/) available to download for the whole country or for a cropped section. 
+
+```{r}
+#| echo: true
+#| warning: false
+#| output: false
+
+# load packages
+library(dplyr)
+library(sf)
+
+# get buildings from LINZ export
+# https://data.linz.govt.nz/layer/101290-nz-building-outlines/
+akl_bldgs <- st_read("../extdata/lds-nz-building-outlines-SHP/")
+```
+
+```{r}
+#| echo: true
+#| label: fig-interactive-cafes
+#| out-width: 100%
+#| fig-cap: Static map of buildings around Auckland Harbour. 
+ 
+# load plotting library
+library(tmap)
+
+# plot buildings around Auckland Harbour
+tmap_mode("plot")
+tm_shape(akl_bldgs) + 
+  tm_polygons()
+```
+
+Building data quality and availability is an issue for analyses of developing nations - where the lower resources and capacity of local municipalities cannot keep up with the pace of informal development. Building shapes derived from satellite imagery help to address this issue (somewhat). Both [Google](https://sites.research.google/open-buildings/) and [Microsoft](https://github.com/microsoft/GlobalMLBuildingFootprints) provide global coverage of building footprints. The projects are in their nascence but it's likely that they will only get better over time. 
+
+
+![](./assets/global-ml-osm.png)
+The highest quality building available currently is the EUCUCCO dataset @milojevic-dupontEUBUCCOV0European2023. This dataset allows for detaileed analysis of urban form as it includes attributes like building type (use), height and date of construction. 
+
+![Some of the building attributes available in EUBUCCO. Example of Paris reproduced from @milojevic-dupontEUBUCCOV0European2023.](./assets/eubucco.png)
+
+
+## Figure-ground diagrams and urban form
+Figure-ground diagrams highlight built and unbuilt space. Only buildings are included in the conventional version resulting in a stark mosaic of black and white that allows for a bird’s eye analysis of urban form and structures. However, adding streets with a tentative width corresponding to its classification (decreasing width in order: primary, secondary, tertiary, residential), can offer more insights about the urban tissue. 
+
+Square mile comparisons of different urban areas (or the same area across time) feature extensively in the book Great Streets by Allan Jacobs [@morphocodeFiguregroundDiagram2019] according to [@boeingUrbanFormFigureGround2017]. Given the highly heterogeneous urban mosaic of megacities like Mumbai, smaller areas are more meaningful as they represent a consistently designed space. For this reason, the figure-ground diagrams in @fig-figure-ground have a 500m bounding box around a central coordinate.
+
+The famous rectangular blocks of New York City (NYC) are a stark contrast to the more sinuous blocks of British (local and colonial) urbanism. Secondary or tertiary roads surround all blocks in NYC while blocks in Islington and Dadar Parsi Colony, two residential neighbourhoods of British design, are connected by residential roads with arterial connections much further away.
+
+```{r}
+#| include: false
+library(osmdata)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(osmplotr)
+library(ggsn)
+source("../../R/centroid_bbox.R")
+source("../../R/return_poche_map.R")
+```
+
+
+```{r}
+#| output: false
+# bounding boxes and extend with spacey function
+pc_bbox <- get_centroid_bounding_box(
+  c("lat" = 19.01879, "lng" = 72.85141),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+be_bbox <- get_centroid_bounding_box(
+  c("lat" = 18.93566, "lng" = 72.8401),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+nyc_bbox <- get_centroid_bounding_box(
+  c("lat" = 40.7921, "lng" = -73.9718),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+ldn_bbox <- get_centroid_bounding_box(
+  c("lat" = 51.53827, "lng" = -0.09772),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+```
+
+
+```{r}
+#| output: false
+# return individual plot objects
+p1 <- return_poche_map(pc_bbox, "Parsi Colony, Dadar", bldg_colour = "black", map_bg = "white")
+p2 <- return_poche_map(be_bbox, "Ballard Estate, Fort", bldg_colour = "black", map_bg = "white")
+p3 <- return_poche_map(nyc_bbox, "Upper West Side, NYC", bldg_colour = "black", map_bg = "white")
+p4 <- return_poche_map(ldn_bbox, "Islington, London", bldg_colour = "black", map_bg = "white")
+```
+
+```{r}
+#| out.width: 100%
+#| label: fig-figure-ground
+#| fig-cap: Modified figure-ground diagrams (with street widths) for neighbourhoods in Mumbai, London and New York City. 
+
+# Compose plot
+((p1 + theme(plot.margin = unit(c(0,10,10,0), "pt"))) +
+  (p2  + theme(plot.margin = unit(c(0,10,10,0), "pt")))) / 
+  ((p3  + theme(plot.margin = unit(c(0,10,0,0), "pt"))) + 
+   (p4))
+```
+
+## Learning resources
+- [Getting building footprints from GlobalML](https://shriv.github.io/e-flaneur/posts/global-ml/)
+- [History of figure-ground diagrams](https://morphocode.com/figure-ground-diagram/)
+- [Building figure-ground diagrams with `osmplotr` in R](https://shriv.github.io/e-flaneur/posts/osmplotr/)

@@ -1,3 +1,4 @@
+
 # POIs
 
 ::: {.callout-note}
@@ -134,3 +135,5 @@ Packages like [`osmdata` in R](https://cran.r-project.org/web/packages/osmdata/v
 - [Getting OSM data with `osmdata` package in R](https://cran.r-project.org/web/packages/osmdata/vignettes/osmdata.html)
 - [Getting OSM data with `pyrosm` in Python](https://pyrosm.readthedocs.io/en/latest/basics.html#read-points-of-interest)
 -  [Bulk download of all OSM data for your city with `osmextract` in R](https://cran.r-project.org/web/packages/osmextract/vignettes/osmextract.html)
+
+## References
