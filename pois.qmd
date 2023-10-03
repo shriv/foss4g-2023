@@ -1,5 +1,5 @@
 
-# POIs
+# POIs {#sec-pois}
 
 ::: {.callout-note}
 A Point of Interest (POI) is a specific point location, or useful site, defined mainly by its geographical coordinates (longitude and latitude). It refers to a place or destination of potential interest. Depending on the type of POI, it can also be referred as a _facility_ or _amenity_. 

@@ -1,2 +1,26 @@
 
-# Introduction
+The disciplines of architecture, urban design and urban planning have long dominated the thinking around cities and urbanism. The world is now majority urban: just over 1 in 2 people worldwide are urban citizens. With an [ongoing super-linear increase in urban citizens since the 1960s](1 in 2 people worldwide are urban citizens), the challenges of cities can no longer be supported by such a small number of professionals. Diversity of thought and approaches to identifying and managing urban challenges becomes the responsibility of everyday citizens. 
+
+Unfortunately, the interest and curiosity of the urbanite is not matched by the availability of data and tools for analysis. Professionals have access to data and tools to enable their study of cities which are typically out of reach for non-professionals. This web-book and accompanying talk are aimed at bridging the gap with FOSS and open data. Examples utilise the R or Python programming language to access and work with urban spatial data. 
+
+## Approach
+Urban analysis spans a limitless spectrum from qualitative social science to using quantitative methods with big data and machine learning. This web-book pursues a code-based quantitative approach that emphasises visual outputs and qualitative interpretation. But why code rather than a mature application like QGIS? A few reasons: 
+
+- There are already plenty of QGIS tutorials. [Several workshops for this year's FOSS4G SOTM Oceania involve QGIS](https://2023.foss4g-oceania.org/#/program)..!
+- While there are many urban analytics courses that focus on machine learning ([here](https://github.com/mszell/geospatialdatascience), [here](https://geographicdata.science/book/intro.html) and [here](https://r-spatial.org/book/)) and courses for learning [Python](https://sustainability-gis.readthedocs.io/en/latest/index.html) or [R](https://r.geocompx.org/) geospatial methods, there aren't as many that focus on simple analyses and an overview of how to build more insights. 
+- A code-based approach to understanding urbanism is far more flexible in the long run. Powerful software like QGIS hit their limits quickly but writing your own code can make use of packages and even other programming languages if the one you have chosen is not sufficient for a particular task. The latter aspect is gaining considerable traction with tools like Rstudio, Jupyter and others allowing for dovetailed analyses between popular languages like R, Python and Julia. 
+- The power of FOSS and open data lies in the extensions - from repeating analyses for different locations or greater spatial extent to statistical modelling, machine learning and big data processing. For example, generating a figure-ground diagram (@sec-figure-ground) for a 500m$^{2}$ area with code allows for easy extension to generating hundreds and thousands of the same with only a single change in the central coordinate. 
+
+## Topics
+The web-book considers three core entities of cities: points of interest (POIs), transport networks and buildings. Each chapter begins with a personal urban story before moving swiftly on to getting the relevant data. Chapters close with examples of how the data can be used to build a richer understanding of urban life. 
+
+
+## Pirate or snake
+The budding urbanist following this web-book has a choice to start with either R or Python based on inclination. A very simple rubric to choose is the preference for visualisation and statistical modelling vs. machine learning. R is better suited to the former and Python to former though in my experience both languages work well for most urban analyses. 
+
+Given the popularity of data science as a career, excellent free resources for learning R and Python are easily found with a simple search. Some good ones to start with include: 
+
+- [R for data science](https://r4ds.hadley.nz/)
+- [Python data science handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+
+TODO: Data science to geospatial data science
