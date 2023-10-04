@@ -1,0 +1,34 @@
+# Urban views
+Cities are synonymous with sights for most of us - from the classic stops to the hidden spots off the beaten track or simply unusual or unexpected. My personal favourites are the quotidien: the sights of everyday life. In London, it's the regimental auro of the terraced houses. In Mumbai, it's the old colonial neighbourhoods with myriad architectural flourishes. In Wellington, it's seeing the lush green canopies crowd out the houses dotted all over the steep hillsides. 
+
+
+::: {layout-ncol=3}
+![Parsi colony, Mumbai.](./assets/parsi-colony.jpeg)
+
+![Badhwar Park, Mumbai.](./assets/badhwar-park.jpeg)
+
+![Islington, London.](./assets/london-islington-1.jpeg)
+
+![Pimlico, London.](./assets/london-pimlico-1.jpeg)
+
+![Kelburn, Wellington.](./assets/wellington-kelburn-1.jpeg)
+
+![Northland, Wellington.](./assets/wellington-northland-2.jpeg)
+
+:::
+
+## Getting street views
+```{r}
+#| echo: true
+
+source("R/street_view.R")
+get_street_view(
+  latitude = -41.2777663,
+  longitude = 174.7610714,
+  heading = 90,
+  filepath = "./assets/wellington-northland-2.jpeg"
+  )
+```
+## Street views and urban wellbeing
+
+## Remote sensing

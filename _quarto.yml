@@ -11,10 +11,11 @@ book:
   author: "Shrividya Ravi"
   chapters:
     - index.qmd
+    - views.qmd
     - pois.qmd
     - street_networks.qmd
     - buildings.qmd
-    - user_data.qmd
+    - mobility.qmd
     - references.qmd
 
 bibliography: references.bib

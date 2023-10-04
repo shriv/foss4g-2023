@@ -13,8 +13,6 @@ library(dplyr)
 library(tmap)
 library(ggplot2)
 library(ggsn)
-library(googleway)
-library(config)
 ```
 
 I grew up in Vashi, originally conceived as a release valve from the bursting island metropolis of Mumbai (also known as Bombay). Vashi was to be part of a nearby series of satellite townships that would provide affordable housing _".. especially for economically weaker sections, low-income groups and industrial labour"_ @yuvaonlineIndiaLargestPlanned2022. Unfortunately, this spillover area, known collectively as Navi Mumbai, features little of the intended ideology and planning @antonopoulosPrototypingInformalityMass. Instead, it repeats the rampant organic urbanism seen in Mumbai - that of well to-do towers and gated communities amidst a mileu of middle-class housing and squat but dense settlements ranging from the semi-formal buildings to informal huts and shelters.   
@@ -22,31 +20,6 @@ I grew up in Vashi, originally conceived as a release valve from the bursting is
 <!-- Connection of well-todo and poor with the above paragraph -->
 The housing society where I grew up was a tranquil oasis of townhouses but across the road was a teeming boil of social and economic activity. A jumbled cluster of semi-formal buildings with shop fronts sticking cheek by jowl next to each other. Shops would casually expand their wares out onto the pavement and in the evenings, street vendors set up their portable stalls on any remaining patch of pavement, calling out regularly in nasal staccato voices. 
 
-```{r}
-#| output: false
-# Get API key from config file
-key <- config::get("key")
-
-# Get streetview images from Google
-# Latitude and longitude can be obtained from Google URL
-# Use the compass mark to estimate a heading value
-# A heading of 0 / 360 = North; 180 = South; 90 = East; 270 = West
-# FOV notes the zoom level
-# TODO Convert to function
-if (!file.exists("./assets/mankhurd.jpeg")){
-  url <- google_streetview(location = c(19.0497003,72.9384668),
-                    size = c(400,400),
-                    panorama_id = NULL,
-                    output = "html",
-                    heading = 180,
-                    fov =90,
-                    pitch = 5,
-                    response_check = FALSE,
-                    key = key)
-  
-  download.file(url, "./assets/mankhurd.jpeg", model="wb")  
-}
-```
 ::: {layout-ncol=2}
 
 ![Railway colony. A tranquil housing society of townhouses in Navi Mumbai suburbs.](./assets/railway-colony.jpeg)

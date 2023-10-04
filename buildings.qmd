@@ -1,18 +1,6 @@
 
 # Buildings
-While the neighbourhood I grew up in was a tumultuous jumble of urban form (@sec-pois), the enclaves of "old Bombay" are worlds apart. The ornate buildings in the tree-lined neighbourhoods of South Bombay areas like Colaba or, Parsi Colony in Dadar are like an elegant elderly lady, sagging and covered in liver-spots, but her charm and beauty still take your breath away. 
-
-```{r}
-library(osmplotr)
-```
-
-
-::: {layout-ncol=2}
-
-![Parsi colony.](./assets/parsi-colony.jpeg)
-
-![Badhwar Park.](./assets/badhwar-park.jpeg)
-:::
+The enclaves of "old Bombay" are worlds apart from the tumultuous jumble of urban form (@sec-pois) of the neighbourhood I grew up in. The ornate buildings in the tree-lined neighbourhoods of Colaba or Parsi Colony in Dadar are like an elegant elderly lady, sagging and covered in liver-spots, but her charm and beauty still take your breath away. 
 
 Like any city in India (and perhaps more so), Mumbai is a city of contradictions and contrast. The razzle dazzle of Bollywood make it the city of dreams but the vast droves of rural migrant workers living in slums also make it the city of inequality. 
 
@@ -20,6 +8,10 @@ Like any city in India (and perhaps more so), Mumbai is a city of contradictions
 > Love is forbidden but romance is blossoming. India is poor, but it is a land of luxury. It has blazing hot summers and snows in the winter. It has the most barren deserts and the lushest jungles...
 
 - _Peter Claridge_ from the Chennai Expat Guide @claridgeChennaiExpatGuide2018
+
+
+## Buildings anchor the city
+Buildings anchor urban form and their spread and style also dictate the aesthetics. This is even more the case for urban areas with a large number of informal dwellings (independent or as part of a slum cluster). Within slums, buildings dictate movement more than street networks via narrow alleys (“gullies” in Mumbai parlance) rather than formally managed and designed streets. 
 
 Despite a substantial slum population (last calculated ~42% in 2011 @MumbaiGreaterMumbai2011), the ingenuity of the people living in these areas exceeds imagination. Facilitated by the cheek-by-jowl proximity of labour and business, slums are economic powerhouses where no task is too small. For example, the recycling of hair waste to wigs and hair extensions is a multi-million dollar industry that employs a vast segment of entrepreneurial individuals and businesses from ragpickers (collecting discarded hair from the streets) to local waste collection depots and wig artisans @doronWasteNationGarbage2018. 
 
@@ -34,9 +26,6 @@ Despite a substantial slum population (last calculated ~42% in 2011 @MumbaiGreat
 :::
 
 
-## Buildings anchor the city
-Buildings anchor urban form and their spread and style also dictate the aesthetics. This is even more the case for urban areas with a large number of informal dwellings (independent or as part of a slum cluster). Within slums, buildings dictate movement more than street networks via narrow alleys (“gullies” in Mumbai parlance) rather than formally managed and designed streets. 
-
 ## Getting building data
 The R package `osmdata` can be used to query for building polygons in a small area. A helper function is used to simplify the generation of a bounding box around a central point. The quality of OSM in New Zealand is very high since LINZ manages regular uploads through their process of deriving outlines from satellite imagery. 
 
@@ -47,6 +36,7 @@ The R package `osmdata` can be used to query for building polygons in a small ar
 library(dplyr)
 library(sf)
 library(osmdata)
+library(osmplotr)
 source("R/centroid_bbox.R")
 
 akl_bbox <- get_centroid_bounding_box(
