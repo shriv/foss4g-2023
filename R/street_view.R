@@ -1,7 +1,13 @@
 library(config)
 library(googleway)
 
-get_street_view <- function(latitude, longitude, heading, filepath){
+get_street_view <- function(
+    latitude,
+    longitude, 
+    heading, 
+    filepath,
+    fov = 90, 
+    pitch = 5){
   # Get API key from config file
   key <- config::get("key")
   
@@ -17,8 +23,8 @@ get_street_view <- function(latitude, longitude, heading, filepath){
                              panorama_id = NULL,
                              output = "html",
                              heading = heading,
-                             fov =90,
-                             pitch = 5,
+                             fov = fov,
+                             pitch =pitch,
                              response_check = FALSE,
                              key = key)
     

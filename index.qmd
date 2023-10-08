@@ -3,32 +3,32 @@ The disciplines of architecture, urban design and urban planning have long domin
 
 Unfortunately, the interest and curiosity of the urbanite is not matched by the availability of data and tools for analysis. Professionals have access to data and tools to enable their study of cities which are typically out of reach for non-professionals. This web-book and accompanying talk are aimed at bridging this gap with FOSS and open data. 
 
+The emphasis on getting and visualising different types of urban data have been inspired by two incredible books on urban design "The Climax City" @rudlinClimaxCityMasterplanning2019 and "Complexcity" @manningComplexCityLondon2020. Both books present digital snapshots of the city with street view photographs, maps and figure-ground diagrams alongside an engaging narrative building on the urban data in the visualisations. Any interested urbanist should be able to build the visualisations exemplified in these books with a foundational understanding of how to get and visualise urban data. It is my hope that this web-book provides a pathway to knowing what to learn and where to go to learn it. 
+
 ## Approach
-Urban analysis spans a limitless spectrum from qualitative social science to quantitative methods with big data and machine learning. This web-book advocates and details a _code-based quantitative approach_ that emphasises visual outputs and qualitative interpretation. But why code rather than a mature application like QGIS? A few reasons: 
+As urbanists, our interests begin with observations of the cities we visit or live in inspiring further questions. My own journey began this way (@sec-networks) where I had many questions about how walkable Wellingon (the city I live in) is. Instead of consulting papers or books, I went head first into a [series of analyses](https://shriv-portfolio.netlify.app/post/walkability-1/). This bias-to-action approach laid the foundations for further study into accessibility, good urban design principles etc. If I hadn't launched into action, I suspect I would still be mired in readings and high level principles. 
 
-- There are already plenty of QGIS tutorials. [Several workshops for this year's FOSS4G SOTM Oceania involve QGIS](https://2023.foss4g-oceania.org/#/program)..!
-- While there are many urban analytics courses that focus on machine learning ([here](https://github.com/mszell/geospatialdatascience), [here](https://geographicdata.science/book/intro.html) and [here](https://r-spatial.org/book/)) and courses for learning [Python](https://sustainability-gis.readthedocs.io/en/latest/index.html) or [R](https://r.geocompx.org/) geospatial methods, there aren't as many that focus on simple analyses and an overview of how to build more insights. 
-- A code-based approach to understanding urbanism is far more flexible in the long run. Powerful software like QGIS hit their limits quickly but writing your own code can make use of packages and even other programming languages if the one you have chosen is not sufficient for a particular task. The latter aspect is gaining considerable traction with tools like Rstudio, Jupyter and others allowing for dovetailed analyses between popular languages like R, Python and Julia. 
-- The [algorithms in QGIS are available as a command line utility](https://docs.qgis.org/3.28/en/docs/user_manual/processing/standalone.html) that you can connect via code to your programming language choice - manually or with [existing tools](https://r-spatial.github.io/qgisprocess/). So, you can do what you would have done in QGIS plus all the things you couldn't! 
-- The power of FOSS and open data lies in the extensions - from repeating analyses for different locations or greater spatial extent to statistical modelling, machine learning and big data processing. For example, generating a figure-ground diagram (@sec-figure-ground) for a 500m$^{2}$ area with code allows for easy extension to generating hundreds and thousands of the same with only a single change to the central coordinate. 
+![Suggested workflow for the aspiring urbanist](./assets/foss4g-approach.png)
 
-## Topics
-This web-book is split into chapters covering core digital representations of cities:
+While I push doing analysis before study, it's more important to incorporate analysis into the journey of becoming an urbanist - especially one who aspires to urban *act*ivism in an informed manner. Analysis, especially the data-driven kind I'm espousing, builds a clear pipeline to knowledge and wisdom supported by study of academic publications, books and courses. 
 
-- urban views (street and satellite)
-- points of interest (POIs)
-- transport networks
-- buildings
-- movement
+### Code-based analyses
+Urban analysis spans a limitless spectrum from qualitative social science to quantitative methods with big data and machine learning. This web-book advocates and details a _code-based quantitative approach_ that emphasises visual outputs and qualitative interpretation. 
 
-TODO: Summarise as land use vs. people vs. interactions
+Why code rather than use a mature application like QGIS? A few reasons: 
 
-Each chapter begins with a personal urban story before moving to getting the relevant data and closing with examples of how the data can be used to build a richer understanding of urban life. Learning resources to tools and examples are linked at the end of each chapter while academic references are compiled in @sec-references. 
+- **There are already plenty of QGIS tutorials**. For example, [several workshops for this year's FOSS4G SOTM Oceania involve QGIS](https://2023.foss4g-oceania.org/#/program)..!
 
-## Pirate or snake
-The aspiring urbanist following this web-book has a choice to start with either R or Python based on inclination. A very simple rubric to choose is the preference for visualisation and statistical modelling vs. machine learning. R has a slight edge for the former and Python to latter though in my experience both languages work very well for urban analyses. 
+- **The power of QGIS is available as code**. The [algorithms in QGIS are available as a command line utility](https://docs.qgis.org/3.28/en/docs/user_manual/processing/standalone.html) that you can connect via code to your programming language choice - manually or with [existing tools](https://r-spatial.github.io/qgisprocess/). So, you can do what you would have done in QGIS plus all the things you couldn't! 
 
-The typical upskilling (if you haven't coded before) is to begin with learning basic data science coding before moving on to learning how to handle geospatial data. Given the popularity of data science as a career, excellent free resources for learning R and Python are easily found with a simple search. Some good ones to start with include: 
+- **A code-based approach is flexible**. Powerful software like QGIS hit their limits quickly but writing your own code can make use of packages and even other programming languages if the one you have chosen is not sufficient for a particular task. The latter aspect is gaining considerable traction with tools like Rstudio, Jupyter and others allowing for dovetailed analyses between popular languages like R, Python and Julia. 
+
+- **A code-based approach is extensible**. The same code can be used for analyses of different locations or greater spatial extent. For example, generating a figure-ground diagram (@sec-figure-ground) for a 500m$^{2}$ area with code allows for easy extension to generating hundreds and thousands of the same with only a single change to the central coordinate. Simple analyses can also be extended with statistical modelling, machine learning and big data processing. 
+
+### Pirate (R) or Snake (Python)
+The aspiring urbanist following this web-book has a choice to start with either R or Python based on inclination. A very simple rubric to choose between the two is a preference for visualisation and statistical modelling vs. machine learning. R has a slight edge for the former and Python to latter. The typical upskilling (if you haven't coded before) is to begin with learning coding for data science (rather than software development) and then progressing to geospatial data science tools. 
+
+Given the popularity of data science as a career, excellent free resources for learning R and Python are easily found with a simple search. Some good ones to start with include: 
 
 - [R for data science](https://r4ds.hadley.nz/)
 - [Python data science handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
@@ -40,3 +40,22 @@ Geospatial data science is no longer far behind with increasing awareness in the
 - [Geocomputation with R](https://r.geocompx.org/)
 - [Spatial data science with R](https://r-spatial.org/book/)
 - [Spatial statistics for statistics: Theory and Practice with R ](https://www.paulamoraga.com/book-spatial/)
+
+### Resources
+In addition to a myriad links through the web-book, specific learning resources to tools and examples are linked at the end of each chapter. Academic or book references are compiled in @sec-references. 
+
+## Topics
+While there are many urban analytics courses that focus on machine learning ([here](https://github.com/mszell/geospatialdatascience), [here](https://geographicdata.science/book/intro.html) and [here](https://r-spatial.org/book/)) and courses for learning [Python](https://sustainability-gis.readthedocs.io/en/latest/index.html) or [R](https://r.geocompx.org/) geospatial methods, there aren't as many that focus on simple analyses and an overview of how to build more insights. 
+
+This web-book is split into chapters covering core digital representations of cities. Chapters are progressed from the simple to the complex - in terms of abstraction of the real world as data. Geospatial data are typically introduced in order as points, lines and polygons and the core chapters of POIs, transport networks and buildings follow this progression. The chapter on urban views is as a bridge taking the aspiring urbanist from _observation_ to _analysis_ by reproducing views of the city for digital analyses. 
+
+- urban views (street and satellite)
+- points of interest (POIs)
+- transport networks
+- buildings
+- movement
+
+Most of the urban elements focus on the spatial but each of them also has a temporal element. Spatio-temporal aspects are hard to cover in an introductory session so they are limited to a tantalising glimpse in the final chapter. 
+
+Each chapter begins with a personal urban story (observation) before moving to getting the relevant data (simple analysis) and closing with examples from academic studies and books of how the data can be used to build a richer understanding of urban life (study). 
+

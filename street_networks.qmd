@@ -1,24 +1,24 @@
+# Transport networks {#sec-networks}
 
-# Transport networks
 My passion for geospatial data and then urban data science was kindled by my desire to understand my own daily life. As a citizen of Wellington, I wanted to understand how the city worked and the subjectivity of my living experiences of the city. Were the buses really that bad? Was walking both a huge energy investment as well as one of the most beautiful experiences of living in this nature-rich city?
 
-I regularly walk around my neighbourhood of Northland. The wind dishevels my hair as I take in the visual panoramas of the city, sea and hills while being serenaded shrieks of the kaka and the heavy whoosh of a kereru's weighty wings. The extreme sensory scapes of Wellington are multi-sensory assault making even a simple 20 minute circumlocutory walk around my house akin to ... 
+I regularly walk around my neighbourhood of Northland. The wind dishevels my hair as I take in the visual panoramas of the city, sea and hills while being serenaded shrieks of the kaka and the heavy whoosh of a kereru's weighty wings. The extreme sensory scapes of Wellington are multi-sensory assault making even a simple 20 minute circumlocutory walk around my house akin to ...
 
 I wasn't always an enthusiastic or willing walker. It took me years to enjoy the special walking conditions of the hilly city I call home. In fact, it took a few years of the comparatively boring walking in one of the flattest regions of the world, Cambridge UK, for me to appreciate the rewarding experience of walking in Wellington.
 
-The slow transition to becoming a walker in Wellington made me realise the challenge of converting this city to an active transport paradise is not an easy one. It was especially difficult to read reports promoting targets for trips made by walking or cycling when the natural topography of Wellington would restrict these activities to a small subset. Even more difficult to stomach was the lack of analyses that consider the challenge of topography for walking or cycling. This prompted to build my own analysis and my journey and learnings are what make want to spread this attitude and capability to all urban citizens who have their own questions. 
-
+The slow transition to becoming a walker in Wellington made me realise the challenge of converting this city to an active transport paradise is not an easy one. It was especially difficult to read reports promoting targets for trips made by walking or cycling when the natural topography of Wellington would restrict these activities to a small subset. Even more difficult to stomach was the lack of analyses that consider the challenge of topography for walking or cycling. This prompted to build my own analysis and my journey and learnings are what make want to spread this attitude and capability to all urban citizens who have their own questions.
 
 ## Networks to navigate the city
-The interested urbanist can consider uses of the street by different modes - cars, walking, cycling, buses, trains or trams. Modes that share the public street space (all but trains) can be considered together or separately depending on the analysis. 
+
+The interested urbanist can consider uses of the street by different modes - cars, walking, cycling, buses, trains or trams. Modes that share the public street space (all but trains) can be considered together or separately depending on the analysis.
 
 The mobility fingerprint of a city is the way street space is shared across the transport modes @nateraExtractingMultimodalFingerprint2020. Cities like Portland and Copenhagen have streets that are pedestrian-only as well as streets that are split for pedestrians and cars (the typical configuration of road and footpath). Amsterdam, with its notable cycling culture has many streets / paths dedicated for cyclists only. By contrast, Phoenix has a majority of streets that are for cars alone!
 
 ![The transport fingerprint of a city: the different ways in which transport modes share street space @nateraExtractingMultimodalFingerprint2020.](./assets/multilayer-multimodal-networks.png)
 
 ## Getting street network data
-Openstreetmap (OSM) is a convenient way to get data of transport networks. A simple filter of "highways" retrieves the known street network. Based on the [extensive tag system of OSM](https://wiki.openstreetmap.org/wiki/Key:highway?uselang=en-GB), other filters are also possible e.g. getting only residential roads or state highways. Like buildings, [LINZ also manages road centrelines for New Zealand](https://data.linz.govt.nz/layer/50329-nz-road-centrelines-topo-150k/). For larger scale analyses of built roads, this is the best way to go. If the OSM data is useful then consider [a bulk download of all OSM data with `osmextract` in R](https://cran.r-project.org/web/packages/osmextract/vignettes/osmextract.html). There are similar tools available in Python as well. 
 
+Openstreetmap (OSM) is a convenient way to get data of transport networks. A simple filter of "highways" retrieves the known street network. Based on the [extensive tag system of OSM](https://wiki.openstreetmap.org/wiki/Key:highway?uselang=en-GB), other filters are also possible e.g. getting only residential roads or state highways. Like buildings, [LINZ also manages road centrelines for New Zealand](https://data.linz.govt.nz/layer/50329-nz-road-centrelines-topo-150k/). For larger scale analyses of built roads, this is the best way to go. If the OSM data is useful then consider [a bulk download of all OSM data with `osmextract` in R](https://cran.r-project.org/web/packages/osmextract/vignettes/osmextract.html). There are similar tools available in Python as well.
 
 ```{r}
 #| echo: true
@@ -43,7 +43,6 @@ akl_roads_osm <- opq(akl_bbox) %>%
 akl_roads_osm_lines <- akl_roads_osm$osm_lines
 ```
 
-
 ```{r}
 #| echo: true
 #| label: fig-bldgs-osm
@@ -61,12 +60,13 @@ tm_shape(akl_roads_osm_lines) +
 ```
 
 ## Exploring with routing
-Routing and navigation go together for most urbanites. We regularly route our proposed journeys with apps like Google Maps to understand transport options and travel distances and times. Once the route has been chosen, the apps cleverly help us navigate our journeys, providing assistance in real time including re-routing when we "go wrong" according to the chosen route. This hybrid of the physical and digital is so entrenched that we barely give it a second thought. 
 
-The same routing algorithms run by Google (and others) can be reproduced with FOSS and open data. Instead of using a single route for journey planning or navigation, we instead use it for analysis. The simplest routing-based analysis is calculating isochrones. 
+Routing and navigation go together for most urbanites. We regularly route our proposed journeys with apps like Google Maps to understand transport options and travel distances and times. Once the route has been chosen, the apps cleverly help us navigate our journeys, providing assistance in real time including re-routing when we "go wrong" according to the chosen route. This hybrid of the physical and digital is so entrenched that we barely give it a second thought.
+
+The same routing algorithms run by Google (and others) can be reproduced with FOSS and open data. Instead of using a single route for journey planning or navigation, we instead use it for analysis. The simplest routing-based analysis is calculating isochrones.
 
 ![Walking isocrhones in 5 minute increments to 25 minutes. Figure reproduced from @buttsBetterRenderingIsochrones.](./assets/isochrones.png)
 
-Isochrones visually summarise points on a map at which you can arrive in the same time. They are a simple visualisation focused on a central location - usually a point of interest e.g. a railway station. Routes are calculated as shortest paths from every intersection in the surrounding street network to this point. Distances can be converted to travel times using an average speed (e.g. 5km/h average walking speed). Once all the routes are computed, they are summarised as isochrones. 
+Isochrones visually summarise points on a map at which you can arrive in the same time. They are a simple visualisation focused on a central location - usually a point of interest e.g. a railway station. Routes are calculated as shortest paths from every intersection in the surrounding street network to this point. Distances can be converted to travel times using an average speed (e.g. 5km/h average walking speed). Once all the routes are computed, they are summarised as isochrones.
 
-## Growing bicycle networks
+## Walking in Wellington

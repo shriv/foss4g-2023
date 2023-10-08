@@ -1,5 +1,5 @@
 # Urban views
-Cities are synonymous with sights for most of us - from the classic stops to the hidden spots off the beaten track or simply unusual or unexpected. My personal favourites are the quotidien: the sights of everyday life. In London, it's the regimental auro of the terraced houses. In Mumbai, it's the old colonial neighbourhoods with myriad architectural flourishes. In Wellington, it's seeing the lush green canopies crowd out the houses dotted all over the steep hillsides. 
+Cities are synonymous with sights - from the classic stops to the hidden spots off the beaten track or the unusual and unexpected. My personal favourites are the quotidien: sights of everyday life. In London, it's the regimental auro of the terraced houses. In Mumbai, it's the old colonial neighbourhoods with an eclectic mix of architectural flourishes. In Wellington, it's seeing the lush green canopies crowd out the houses dotted all over the steep hillsides. 
 
 
 ::: {layout-ncol=3}
@@ -11,24 +11,42 @@ Cities are synonymous with sights for most of us - from the classic stops to the
 
 ![Pimlico, London.](./assets/london-pimlico-1.jpeg)
 
-![Kelburn, Wellington.](./assets/wellington-kelburn-1.jpeg)
+![Kelburn, Wellington.](./assets/wellington-kelburn-2.jpeg)
 
-![Northland, Wellington.](./assets/wellington-northland-2.jpeg)
-
+![Northland, Wellington.](./assets/wellington-kelburn-3.jpeg)
 :::
 
+## Collages of urban character
+A collage of photographs showcasing visual congruity of a particular feature is a very simple way to go from observation to analysis. The excellent book on London's urban design, _Complexcity_ @manningComplexCityLondon2020, has several examples of collages that give the reader a sense of urban character whether it's architectural elements, streetscapes or landscapes. 
+
+The example of Victorian era residences around London is reproduced below. This series of photographs showcase the striking similarity in Victorian architecture without the buildings looking like clones. While the houses are stuck close together, the emphasis on large windows and reasonable setbacks from the road increases their liveability with more light and lower noise levels. 
+
+![Collage of Victorian residences in London from @manningComplexCityLondon2020.](./assets/victorian-residences-complexcity.png)
+
+
 ## Getting street views
+Building a visual collage of the sights we've physically visited and taken a photo of is a happy pastime once we're settled from our travels. With the power of tools like Google Street View or Mapillary, we can explore the sights without even being there. And in a similar vein, we can "snap pictures" of these places through handy APIs. 
+
+Google Street View is the most well-known and it has a helpful free API that we can access for snapping photos. All the street views in this web-bookwere built by running the function below which "makes a call" to API requesting an image with the central coordidnates and direction to be downloaded as specified in the function _arguments_. This is where the wonder of programming languages like R and Python come in. Not only can you get a series of photos easily but the hard work of connecting to the API and getting what is requested is done using code available as a package (here, it's the `googleway` package). All the user needs to do is run a few simple lines of code. 
+
 ```{r}
 #| echo: true
 
 source("R/street_view.R")
 get_street_view(
-  latitude = -41.2777663,
-  longitude = 174.7610714,
-  heading = 90,
-  filepath = "./assets/wellington-northland-2.jpeg"
+  latitude = -41.2854659,
+  longitude = 174.7622097,
+  # North (0/ 360), South (180), East (90), West (270)
+  heading = 180,
+  filepath = "./assets/wellington-kelburn-3.jpeg"
   )
 ```
-## Street views and urban wellbeing
 
 ## Remote sensing
+Remote sensing comprises satellite imagery (captured by satellites in orbit) as well as lower altitude data like LiDAR (captured by planes). These data can generate incredible urban sights (and insights) by capturing patterns and characteristics that we miss while moving around at ground level. 
+
+Satellite imagery is especially powerful as it is not only a global dataset but it also captures images at different wavelengths which allow for different analyses and insights.  
+
+![Paris, France image in the near infrared. Healthy vegetation is a vibrant red, barren fields are turquoise and urban areas are in blue.](./assets/paris-nir.png)
+
+ 
