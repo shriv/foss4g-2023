@@ -1,9 +1,5 @@
 # POIs {#sec-pois}
 
-::: callout-note
-A Point of Interest (POI) is a specific point location, or useful site, defined mainly by its geographical coordinates (longitude and latitude). It refers to a place or destination of potential interest. Depending on the type of POI, it can also be referred as a *facility* or *amenity*.
-:::
-
 ```{r}
 #| include: false
 library(osmdata)
@@ -14,11 +10,11 @@ library(ggplot2)
 library(ggsn)
 ```
 
-I grew up in Vashi, originally conceived as a release valve from the bursting island metropolis of Mumbai (also known as Bombay). Vashi was to be part of a nearby series of satellite townships that would provide affordable housing *".. especially for economically weaker sections, low-income groups and industrial labour"* @yuvaonlineIndiaLargestPlanned2022. Unfortunately, this spillover area, known collectively as Navi Mumbai, features little of the intended ideology and planning @antonopoulosPrototypingInformalityMass. Instead, it repeats the rampant organic urbanism seen in Mumbai - that of well to-do towers and gated communities amidst a mileu of middle-class housing and squat but dense settlements ranging from the semi-formal buildings to informal huts and shelters.
+I grew up in Vashi, originally conceived as spillover urban development from the bursting island metropolis of Mumbai (also known as Bombay). Vashi was to be part of a nearby series of satellite townships that would provide affordable housing *".. especially for economically weaker sections, low-income groups and industrial labour"* @yuvaonlineIndiaLargestPlanned2022. Unfortunately, this spillover area, known collectively as Navi Mumbai (New Bombay), features little of the intended ideology and planning @antonopoulosPrototypingInformalityMass. Instead, it repeats the rampant organic urbanism seen in Mumbai - that of well to-do towers and gated communities amidst a mileu of middle-class housing and squat but dense settlements ranging from the semi-formal buildings to informal huts and shelters.
 
 <!-- Connection of well-todo and poor with the above paragraph -->
 
-The housing society where I grew up was a tranquil oasis of townhouses but across the road was a teeming boil of social and economic activity. A jumbled cluster of semi-formal buildings with shop fronts sticking cheek by jowl next to each other. Shops would casually expand their wares out onto the pavement and in the evenings, street vendors set up their portable stalls on any remaining patch of pavement, calling out regularly in nasal staccato voices.
+The housing society where I grew up was a tranquil oasis of townhouses but across the road was a teeming boil of social and economic activity. A jumbled cluster of semi-formal buildings with shop fronts sticking cheek by jowl next to each other. Shops would casually expand their wares out onto the pavement and in the evenings, street vendors would set up their portable stalls on any remaining patch of pavement, calling out regularly in nasal staccato voices.
 
 ::: {layout-ncol="2"}
 ![Railway colony. A tranquil housing society of townhouses in Navi Mumbai suburbs.](./assets/railway-colony.jpeg)
@@ -28,7 +24,7 @@ The housing society where I grew up was a tranquil oasis of townhouses but acros
 
 My early memories of cities are urbanscapes with dramatic fluctuations in typology, where a hop across the road takes you from a tranquil, spacious housing society to narrow lanes and highly dense collisions of commerce and household life. This urban drama typifies many developing world towns and cities.
 
-The dynamism of cities like Mumbai lies in the dizzying array of amenities cropping up along informal housing as well as established apartment buildings - offering everything from a nursing home, an evening hawker selling roasted nuts, whose entire store is strapped to his front, to a plywood store with a glamorous updo of air conditioning and glossy surfaces. The facilities aren't restricted to the street fronts. Further into larger buildings, you can find other businesses tucked away - tuition centres, hair salons and boutiques taking advantage of the quieter solitude of the building atrium.
+The dynamism of cities like Mumbai lies in the dizzying array of amenities cropping up along informal housing as well as established apartment buildings - offering everything from a nursing home, an evening hawker selling roasted nuts, whose entire store is strapped to his front, to a plywood store with a glamorous updo of air conditioning and glossy surfaces. The facilities aren't restricted to the street fronts. You can find other businesses tucked away inside larger buildings with tuition centres, hair salons and boutiques taking advantage of the quieter solitude of the building atrium.
 
 ::: {layout-ncol="2"}
 ![Shopfronts of an informal housing cluster.](./assets/railway-colony-opp.jpeg)
@@ -40,7 +36,11 @@ The dynamism of cities like Mumbai lies in the dizzying array of amenities cropp
 
 In larger cities POIs, describe the flavour of a neighbourhood through their character and distribution. Tourists (from the city or elsewhere) visit these areas for specific experiences or vibe - for example, a theatre and dining experience in the thespian cluster at the West End of London.
 
-In a city like Wellington, POIs are tightly clustered in the city centre and across a select few "high streets" of higher density suburbs like Newtown, Miramar, Karori and Johnsonville that act like satellite hubs. Unlike the frothing, spicy, tumultuous flavours of Mumbai, the flavour of Wellington is more of a simmering broth with a strong depth of flavour from the tightly clustered, amenity-rich city centre and sudden, deep bursts of flavour as we explore the surrounding suburbs.
+::: callout-note
+A Point of Interest (POI) is a specific point location, or useful site, defined mainly by its geographical coordinates (longitude and latitude). It refers to a place or destination of potential interest. Depending on the type of POI, it can also be referred as a *facility* or *amenity*.
+:::
+
+In a city like Wellington, POIs are tightly clustered in the city centre and across a select few "high streets" of higher density suburbs like Newtown, Miramar, Karori and Johnsonville that act like satellite hubs. Unlike the frothing, spicy, tumultuous flavours of Mumbai, the flavour of Wellington is more of a simmering broth with a strong depth of flavour from the tightly clustered, amenity-rich city centre and sudden, deep bursts of flavour in the surrounding suburbs.
 
 ## Exploring POIs
 
@@ -48,6 +48,7 @@ Depending on the city of interest, POI data may be plentiful, scarce or patchy. 
 
 ```{r}
 #| echo: true
+#| cache: true
 # load packages
 library(dplyr)
 library(osmdata)
@@ -81,11 +82,11 @@ The biggest challenge for POI information is in developing countries where the G
 
 ## Understanding cities with POIs
 
-Daily life amenities like schools, cafes, supermarkets, medical centres play a strong role in our perceptions of neighbourhoods to live in. While individuals have their own rubrics for choosing between myriad aspects of a neighbourhood amenity access, job opportunities, transport access and house prices, there are strong correlations between all these aspects that can drive general trends in cities. For example, a recent study by Zhang and Pfoser @zhangUsingOpenStreetMapPointofinterest2019 found that just the density of cafes has a strong correlation with house prices.
+Daily life amenities like schools, cafes, supermarkets, medical centres play a strong role in our perceptions of neighbourhoods to live in. While individuals have their own rubrics for choosing between myriad aspects of a neighbourhood amenity access, job opportunities, transport access and house prices, there are strong correlations between all these aspects that can drive general trends in cities. For example, a recent study by _Zhang and Pfoser_ @zhangUsingOpenStreetMapPointofinterest2019 found that just the density of cafes has a strong correlation with house prices.
 
-![Strong correlation between coffee shop density and real estate prices in New York City. Pick your mortgage debt based on your coffee addiction! @zhangUsingOpenStreetMapPointofinterest2019](./assets/pois-coffee-shops-real-estate-prices.png)
+![Strong correlation between coffee shop density and real estate prices in New York City. Pick your mortgage debt based on your coffee addiction! _Zhang and Pfoser_ @zhangUsingOpenStreetMapPointofinterest2019](./assets/pois-coffee-shops-real-estate-prices.png)
 
-Another example from Luo et al. @luoUrbanFunctionalZone2023 shows how a collection of POIs in a city can be summarised to describe areas by functionality.
+Another example from _Luo et al._ @luoUrbanFunctionalZone2023 shows how a collection of POIs in a city can be summarised to describe areas by functionality.
 
 ::: {layout-ncol="2"}
 ![POIs in Nanning.](./assets/pois-nanning.png)

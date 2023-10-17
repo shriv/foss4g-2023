@@ -2,26 +2,28 @@
 
 My passion for geospatial data and then urban data science was kindled by my desire to understand my own daily life. As a citizen of Wellington, I wanted to understand how the city worked and the subjectivity of my living experiences of the city. Were the buses really that bad? Was walking both a huge energy investment as well as one of the most beautiful experiences of living in this nature-rich city?
 
-I regularly walk around my neighbourhood of Northland. The wind dishevels my hair as I take in the visual panoramas of the city, sea and hills while being serenaded shrieks of the kaka and the heavy whoosh of a kereru's weighty wings. The extreme sensory scapes of Wellington are multi-sensory assault making even a simple 20 minute circumlocutory walk around my house akin to ...
+I regularly walk around my neighbourhood of Northland. The wind dishevels my hair as I take in the visual panoramas of the city, sea and hills while being serenaded shrieks of the kaka and the heavy whoosh of a kereru's weighty wings. The extreme sensory scapes of Wellington are multi-sensory assault.
 
-I wasn't always an enthusiastic or willing walker. It took me years to enjoy the special walking conditions of the hilly city I call home. In fact, it took a few years of the comparatively boring walking in one of the flattest regions of the world, Cambridge UK, for me to appreciate the rewarding experience of walking in Wellington.
+I wasn't always an enthusiastic or willing walker. It took me years to enjoy the special walking conditions of the hilly city I call home. In fact, it took a few years of the comparatively boring walking in one of the flattest regions of the world, Cambridge (UK), for me to appreciate the rewarding experience of walking in Wellington.
 
-The slow transition to becoming a walker in Wellington made me realise the challenge of converting this city to an active transport paradise is not an easy one. It was especially difficult to read reports promoting targets for trips made by walking or cycling when the natural topography of Wellington would restrict these activities to a small subset. Even more difficult to stomach was the lack of analyses that consider the challenge of topography for walking or cycling. This prompted to build my own analysis and my journey and learnings are what make want to spread this attitude and capability to all urban citizens who have their own questions.
+The slow transition to becoming a walker in Wellington made me realise the challenge of converting this city to an active transport paradise is not an easy one. It was especially difficult to read reports promoting targets for trips made by walking or cycling when the natural topography of Wellington would restrict these activities to a small subset of Wellingtonians. Even more difficult to stomach was the lack of analyses that consider the challenge of topography for walking or cycling. This prompted to build my own analysis and my journey and learnings are what make me advocate this capability to all urban citizens who have their own questions.
 
-## Networks to navigate the city
+## Mobility fingerprint of a city
 
-The interested urbanist can consider uses of the street by different modes - cars, walking, cycling, buses, trains or trams. Modes that share the public street space (all but trains) can be considered together or separately depending on the analysis.
-
-The mobility fingerprint of a city is the way street space is shared across the transport modes @nateraExtractingMultimodalFingerprint2020. Cities like Portland and Copenhagen have streets that are pedestrian-only as well as streets that are split for pedestrians and cars (the typical configuration of road and footpath). Amsterdam, with its notable cycling culture has many streets / paths dedicated for cyclists only. By contrast, Phoenix has a majority of streets that are for cars alone!
+Our street are shared by several different modes - cars, walking, cycling, buses, trains, trams and new transport technologies like e-scooters. The mobility fingerprint of a city is the way street space is shared across the transport modes @nateraExtractingMultimodalFingerprint2020. Cities like Portland and Copenhagen have streets that are pedestrian-only as well as streets that are split for pedestrians and cars (the typical configuration of road and footpath). Amsterdam, with its notable cycling culture has many streets / paths dedicated for cyclists only. By contrast, Phoenix has a majority of streets that are for cars alone!
 
 ![The transport fingerprint of a city: the different ways in which transport modes share street space @nateraExtractingMultimodalFingerprint2020.](./assets/multilayer-multimodal-networks.png)
 
-## Getting street network data
+With a little coding experience in Python urbanists can generate the graph above or a new set for cities of their choice with the [open source code associated with the paper by _Natera et al._](https://github.com/nateraluis/Multimodal-Fingerprint) thanks to FOSS proponents in academia and extensive Openstreetmap tags. 
 
-Openstreetmap (OSM) is a convenient way to get data of transport networks. A simple filter of "highways" retrieves the known street network. Based on the [extensive tag system of OSM](https://wiki.openstreetmap.org/wiki/Key:highway?uselang=en-GB), other filters are also possible e.g. getting only residential roads or state highways. Like buildings, [LINZ also manages road centrelines for New Zealand](https://data.linz.govt.nz/layer/50329-nz-road-centrelines-topo-150k/). For larger scale analyses of built roads, this is the best way to go. If the OSM data is useful then consider [a bulk download of all OSM data with `osmextract` in R](https://cran.r-project.org/web/packages/osmextract/vignettes/osmextract.html). There are similar tools available in Python as well.
+## Getting street network data
+Openstreetmap (OSM) is the convenient way to get _multi-modal_ transport networks. A simple filter of "highways" retrieves the known street network. Based on the [extensive tag system of OSM](https://wiki.openstreetmap.org/wiki/Key:highway?uselang=en-GB), other filters are also possible e.g. getting only residential roads or state highways. Like buildings, [LINZ also manages road data for New Zealand](https://data.linz.govt.nz/data/category/roads-and-addresses/). 
+
+For larger scale, driving-related analyses of built roads, this is the best way to go. For multi-modal OSM data, consider [a bulk download of all OSM data with `osmextract` in R](https://cran.r-project.org/web/packages/osmextract/vignettes/osmextract.html). There are similar tools available in Python as well.
 
 ```{r}
 #| echo: true
+#| cache: true
 
 # load packages to get data
 library(dplyr)
@@ -59,14 +61,41 @@ tm_shape(akl_roads_osm_lines) +
   tm_lines()
 ```
 
-## Exploring with routing
-
+## Exploring with routing {#sec-routing}
 Routing and navigation go together for most urbanites. We regularly route our proposed journeys with apps like Google Maps to understand transport options and travel distances and times. Once the route has been chosen, the apps cleverly help us navigate our journeys, providing assistance in real time including re-routing when we "go wrong" according to the chosen route. This hybrid of the physical and digital is so entrenched that we barely give it a second thought.
 
-The same routing algorithms run by Google (and others) can be reproduced with FOSS and open data. Instead of using a single route for journey planning or navigation, we instead use it for analysis. The simplest routing-based analysis is calculating isochrones.
+The same routing algorithms run by Google (and others) can be reproduced with FOSS and open data. Instead of using a single route for journey planning or navigation, we instead use it for analysis. The simplest routing-based analysis is calculating catchment areas around a central location.
 
-![Walking isocrhones in 5 minute increments to 25 minutes. Figure reproduced from @buttsBetterRenderingIsochrones.](./assets/isochrones.png)
+![Catchments up to 600m for Central Park play area in Wellington. Analysis with Python and the [osmnx package](https://github.com/gboeing/osmnx). Code [here](https://github.com/shriv/foss4g-workshop/blob/master/notebooks/applications.ipynb).](./assets/routes-to-catchment.png)
 
-Isochrones visually summarise points on a map at which you can arrive in the same time. They are a simple visualisation focused on a central location - usually a point of interest e.g. a railway station. Routes are calculated as shortest paths from every intersection in the surrounding street network to this point. Distances can be converted to travel times using an average speed (e.g. 5km/h average walking speed). Once all the routes are computed, they are summarised as isochrones.
+Catchments visually summarise areas on a map that are equidistant along the transport network to some point of interest e.g. a playground. Routes are calculated as shortest paths from every intersection in the surrounding street network to this point. Catchments can be converted to the more well-used "isochrones", which summarises by travel time, using an average speed (e.g. 5km/h average walking speed). 
 
-## Walking in Wellington
+## Urban flows
+Many routes to one place can also be summarised as flows by counting the number of unique routes on any given link of the network. Filtering these flows can identify arterial streets and roads. In Wellington, it's easy the see the two state highways converging in from the north. We can also see the main roads leading down from the suburbs down to the arteries leading to the station. 
+
+![Arterial roads in Wellington. Analysis with Python and the [osmnx](https://github.com/gboeing/osmnx) and [pandana](https://github.com/UDST/pandana) packages. Code [here](https://github.com/shriv/foss4g-workshop/blob/master/notebooks/applications.ipynb).](./assets/arterial-roads-wgtn.png)
+
+## Walking in hilly Wellington
+We all have our passions as urbanists. For me, it's how walking and cycling can become a bigger part of our daily lives. The change is already in motion but cycling and walking trips still dwarf in comparison to driving. Like with any urban problem, understanding the present (and often the past) is key to shaping the future. If we want to convert more trips from driving to walking (to reduce emissions) or just encourage more walking (for health reasons), we need to explore the current state - especially the barriers. 
+
+Anyone familiar with Wellington knows that the city is very hilly! This poses considerable challenges for walking - even to a local amenity like a council playground. Accounting for travel times on hilly terrain shows that there is considerable variation for residents. Even a well-established suburb like Karori with multiple playgrounds has a high average due to considerably lower access for people who live on the hillier outskirts. 
+
+![Local walkability in Wellington suburbs. Individual values for suburban walkability for every street intersection are shown in the visualisation for Karori. The _forest plot_ on the right summarises the average for every suburb and the grey area summarises the average across all suburbs.](./assets/walking-wellington.png)
+
+
+## Urban accessibility
+Newer developments or lower price in housing starved cities are built around the fringes and thus find themselves too far from amenities making driving the only plausible option. Changing to public transit from driving has its own challenges. Access is high along routes but without an extensive network, public transit cannot beat the homogeneous access for cars. 
+
+![Travel times to a tertiary hospitql in São Paulo by car vs. public transit. Image reproduced from _Introduction to urban accessibility_ @pereiraIntroductionUrbanAccessibility2023. Figure made with the [accessibility](https://github.com/ipeaGIT/accessibility) package.](./assets/pt-car-access-hospitals.png)
+
+How can we provision better access within neigbourhoods via non-driving modes to reduce our impact on the planet as well as improve our health and safety? These questions are core to our lives and wellbeing. We just need more people analysing and thinking of better options for the future.  
+
+
+## Learning tips
+Street network analysis, empowered by routing-based methods, is a powerful tool in any urbanist's arsenal as it connects so closely to our real-world lives. However, there is a learning curve to understanding the methods and then applying them. My recommendation is to spend time with catchment and isochrone analyses [connecting data visualisations to real world experience](https://mappyurbanist.com/blog/2023-04-temporal-isochrone/). 
+
+## Resources
+- Some tools for working with GTFS data in R. [`gtfstools`](https://ipeagit.github.io/gtfstools/) and [`tidytransit`](https://r-transit.github.io/tidytransit/index.html).
+- Some tools for working with GTFS data in Python. [`partridge`](https://github.com/remix/partridge) and [`gtfs_functions`](https://github.com/Bondify/gtfs_functions). 
+- [Blog post on walking in hilly Wellington](https://shriv-portfolio.netlify.app/post/walkability-2/). 
+- [Introduction to urban accessibility](https://ipeagit.github.io/intro_access_book/)

@@ -1,0 +1,50 @@
+# Introduction
+My journey from urbanite to urbanist and urban analyst (@sec-networks) began with many questions about the walkability of Wellington (the city I live in). I would see commuting walkers but no walkers to local amenities. _Was it preference?_ _Was it the challenging topography?_ Instead of consulting papers or books, I went head first into a [series of analyses](https://shriv.github.io/sdss-2023/). This bias-to-action approach laid the foundations for further study into areas that resonated with me: accessibility, mobility and urban form. If I hadn't launched into action, I suspect I would still be mired in readings without much clarity of my own interests.
+
+![Suggested workflow for the aspiring urbanist](./assets/foss4g-approach.png)
+
+While I push doing analysis before study, it's more important to incorporate analysis into the journey of becoming an urbanist - especially one who aspires to urban *act*ivism in an informed manner. Analysis, especially the data-driven kind I'm espousing, builds a clear pipeline to knowledge and wisdom when supported by study of academic publications, books and courses.
+
+## Code-based analyses
+
+Urban analysis spans a wide spectrum from qualitative social science to quantitative approaches using big data and machine learning. This web-book advocates and details a *code-based quantitative approach* that emphasises *visual narratives*.
+
+Why code and not QGIS? A few reasons:
+
+-   **The power of QGIS is available as code**. The [algorithms in QGIS are available as a command line utility](https://docs.qgis.org/3.28/en/docs/user_manual/processing/standalone.html) that you can access through your programming language of choice [e.g. an R package](https://r-spatial.github.io/qgisprocess/). So, you can do what you would have done in QGIS plus all the things you couldn't!
+
+-   **A code-based approach is flexible**. When writing your own code you can make use of packages and even other programming languages if the one you have chosen is not sufficient for a particular task. The latter aspect is gaining considerable traction with programming editors like Rstudio, Jupyter and others allowing for dovetailed analyses between popular languages like R, Python and Julia.
+
+-   **A code-based approach is extensible**. The same code can be used for analyses of different locations or greater spatial extent. For example, generating a figure-ground diagram (@sec-figure-ground) for a 500m$^{2}$ area with code allows for easy extension to generating hundreds and thousands of the same with only a single change to the central coordinate. Simple analyses can also be extended with statistical modelling, machine learning and big data processing.
+
+## Pirate (R) or Snake (Python)
+
+While the examples in this web-book use R, the aspiring urbanist has a choice to start with either R or Python based on inclination. A very simple rubric to choose between the two is a preference for visualisation and statistical modelling vs. machine learning. R has a slight edge for the former and Python to latter. The typical upskilling (if you haven't coded before) is to begin with learning coding for data science (rather than software development) and then progressing to geospatial data science tools.
+
+Given the popularity of data science as a career, excellent free resources for learning R and Python are easily found with a simple search. Some good ones to start with include:
+
+-   [R for data science](https://r4ds.hadley.nz/)
+-   [Python data science handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+
+Geospatial data science is not far behind, with increasing awareness in the research communities of the opportunities and rich insights that lie in geospatial data. Like data science, FOSS is the tool of choice for geospatial data scientists. Courses focusing on spatial data are also reasonably easy to find and follow.
+
+-   [Sustainability GIS with Python](https://sustainability-gis.readthedocs.io/en/latest/index.html)
+-   [Geographic Data Science with Python](https://geographicdata.science/book/intro.htmls)
+-   [Geocomputation with R](https://r.geocompx.org/)
+-   [Spatial data science with R](https://r-spatial.org/book/)
+-   [Spatial statistics for statistics: Theory and Practice with R](https://www.paulamoraga.com/book-spatial/)
+
+## Topics
+
+This web-book is split into chapters covering common geospatial data types - progressing from the simple to the complex. Geospatial data are typically introduced in order as points, lines and polygons and the core chapters of POIs, transport networks and buildings follow this progression. The chapter on urban views is a bridge taking the aspiring urbanist from *observation* to *analysis* by reproducing views of the city for digital analyses. 
+
+-   urban views (street and satellite)
+-   points of interest (POIs)
+-   transport networks
+-   buildings
+
+Each chapter begins with a personal urban story (observation) before moving to getting the relevant data (simple analysis) and closing with examples from academic studies and books of how the data can be used to build a richer understanding of urban life (study).
+
+
+## Resources
+The [github repo for this web-book](https://github.com/shriv/foss4g-2023) has code for getting and visualising data can be found. In addition, there are a myriad links through the web-book. Specific learning resources to tools and examples are linked at the end of each chapter. Academic or book references are compiled in @sec-references.

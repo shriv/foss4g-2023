@@ -1,5 +1,16 @@
 
-# Buildings
+# Buildings {#sec-buildings}
+
+```{r}
+# load packages to get data
+library(dplyr)
+library(sf)
+library(osmdata)
+library(osmplotr)
+source("R/centroid_bbox.R")
+```
+
+
 The enclaves of "old Bombay" are worlds apart from the tumultuous jumble of urban form (@sec-pois) of the neighbourhood I grew up in. The ornate buildings in the tree-lined neighbourhoods of Colaba or Parsi Colony in Dadar are like an elegant elderly lady, sagging and covered in liver-spots, but her charm and beauty still take your breath away. 
 
 Like any city in India (and perhaps more so), Mumbai is a city of contradictions and contrast. The razzle dazzle of Bollywood make it the city of dreams but the vast droves of rural migrant workers living in slums also make it the city of inequality. 
@@ -7,7 +18,7 @@ Like any city in India (and perhaps more so), Mumbai is a city of contradictions
 > India loves to contradict itself on everything and anything. [...] Every stereotype you know of India is completely true. At the same time the stereotypes are being broken all the time. 
 > Love is forbidden but romance is blossoming. India is poor, but it is a land of luxury. It has blazing hot summers and snows in the winter. It has the most barren deserts and the lushest jungles...
 
-- _Peter Claridge_ from the Chennai Expat Guide @claridgeChennaiExpatGuide2018
+- _The Chennai Expat Guide (2018)_ @claridgeChennaiExpatGuide2018
 
 
 ## Buildings anchor the city
@@ -17,7 +28,7 @@ Despite a substantial slum population (last calculated ~42% in 2011 @MumbaiGreat
 
 > If you look over the sprawl extending out from Indian cities, you will see that there are a lot of informal developments that are not slums. The more affluent of these settlements differ in terms of their density and the materials from which they are built, and they tend to be made up of single family homes with private space. Yet the form of the settlement, the layout of streets and spaces, and the relationship of homes to each other is not so different from the poorest settlements made out of corrugated sheet and tarpaulin.
 
-- Rudlin and Hemani. _Climax city (2019)_ @rudlinClimaxCityMasterplanning2019
+- _Climax city (2019)_ @rudlinClimaxCityMasterplanning2019
 
 ::: {layout-ncol=2}
 ![Shivaji Nagar.](./assets/shivaji-nagar.jpeg)
@@ -31,6 +42,7 @@ The R package `osmdata` can be used to query for building polygons in a small ar
 
 ```{r}
 #| echo: true
+#| cache: true
 
 # load packages to get data
 library(dplyr)
@@ -97,14 +109,14 @@ tm_shape(akl_bldgs) +
   tm_polygons()
 ```
 
-Building data quality and availability is an issue for analyses of developing nations - where the lower resources and capacity of local municipalities cannot keep up with the pace of informal development. Building shapes derived from satellite imagery help to address this issue (somewhat). Both [Google](https://sites.research.google/open-buildings/) and [Microsoft](https://github.com/microsoft/GlobalMLBuildingFootprints) provide global coverage of building footprints. The projects are in their nascence but it's likely that they will only get better over time. TODO: Global ML is not that great at sub-dividing the tightly clustered urban form of slums. Satellite imagery of this area to show the high density of very small buildings. 
+Building data quality and availability is an issue for analyses of developing nations - where the lower resources and capacity of local municipalities cannot keep up with the pace of informal development. Building shapes derived from satellite imagery help to address this issue (somewhat). Both [Google Open Buildings](https://sites.research.google/open-buildings/) and [Microsoft Global ML](https://github.com/microsoft/GlobalMLBuildingFootprints) provide global coverage of building footprints. While Global ML has poor resolution and doesn't correctly sub-divide the tightly clustered urban form of slums, the projects are in their nascence and it's likely that they will only get better over time. 
 
 
 ![](./assets/global-ml-osm.png)
 
 The highest quality building available currently is the EUCUCCO dataset @milojevic-dupontEUBUCCOV0European2023. This dataset allows for detaileed analysis of urban form as it includes attributes like building type (use), height and date of construction. With such a rich dataset, the evolution and type of urban form can be traced through time. It's especially useful as a comparsion to theories in urban economics. 
 
-![Some of the building attributes available in EUBUCCO. Example of Paris reproduced from @milojevic-dupontEUBUCCOV0European2023.](./assets/eubucco.png)
+![Some of the building attributes available in EUBUCCO. Example of Paris reproduced from _Milojevic-Dupont et al._ @milojevic-dupontEUBUCCOV0European2023.](./assets/eubucco.png)
 
 
 ## Figure-ground diagrams {#sec-figure-ground}
@@ -113,12 +125,9 @@ Figure-ground diagrams highlight built and unbuilt space. Only buildings are inc
 
 > By showing buildings in black and removing most other detail, they [the figure-ground] reveal the truth about a place. Like X-rays, they are calibrated to see through the tissue of detail on a map or aerial photo, revealing the underlying structure of an urban area. In doing so, the plans reveal the shattering and decay of many industrial towns and cities as well as the inner beauty and structure of ‘healthy’ urban places. You can look at the figure ground plan of a city and ‘read’ the place: you can generally tell where the centre is and trace the transept to its suburbs, you can follow the line of the most important commercial streets, identify which districts are thriving and which are declining.
 
-- Rudlin and Hemani. _Climax city (2019)_ @rudlinClimaxCityMasterplanning2019
+- _Climax city (2019)_ @rudlinClimaxCityMasterplanning2019
 
-Figure-ground diagrams capture a square mile section of an urban area [@morphocodeFiguregroundDiagram2019] - a rounded 2km$^2$ in metric terms.   
-
-
-Given the highly heterogeneous urban mosaic of megacities like Mumbai, smaller areas are more meaningful as they represent a consistently designed space. For this reason, the figure-ground diagrams in @fig-figure-ground have a 500m bounding box around a central coordinate.
+Figure-ground diagrams capture a square mile section of an urban area [@morphocodeFiguregroundDiagram2019] - a rounded 2km$^2$ in metric terms. However, given the highly heterogeneous urban mosaic of megacities like Mumbai, smaller areas are more meaningful as they represent a consistently designed space. With this rationale, the figure-ground diagrams in @fig-figure-ground have a 500m bounding box around a central coordinate.
 
 The famous rectangular blocks of New York City (NYC) are a stark contrast to the more sinuous blocks of British (local and colonial) urbanism. Secondary or tertiary roads surround all blocks in NYC while blocks in Islington and Dadar Parsi Colony, two residential neighbourhoods of British design, are connected by residential roads with arterial connections much further away.
 
@@ -137,6 +146,7 @@ source("R/return_poche_map.R")
 
 ```{r}
 #| output: false
+#| cache: true
 # bounding boxes and extend with spacey function
 pc_bbox <- get_centroid_bounding_box(
   c("lat" = 19.01879, "lng" = 72.85141),
@@ -167,6 +177,7 @@ ldn_bbox <- get_centroid_bounding_box(
 
 ```{r}
 #| output: false
+#| cache: true
 # return individual plot objects
 p1 <- return_poche_map(pc_bbox, "Parsi Colony, Dadar", bldg_colour = "black", map_bg = "white")
 p2 <- return_poche_map(be_bbox, "Ballard Estate, Fort", bldg_colour = "black", map_bg = "white")
@@ -187,10 +198,10 @@ p4 <- return_poche_map(ldn_bbox, "Islington, London", bldg_colour = "black", map
    (p4))
 ```
 
-## Urban morphology
+## Learning tips
 
 
-## Learning resources
+## Resources
 - [Google Open Buildings](https://sites.research.google/open-buildings/)
 - [Microsoft GlobalML](https://github.com/microsoft/GlobalMLBuildingFootprints)
 - [Getting building footprints from GlobalML](https://shriv.github.io/e-flaneur/posts/global-ml/)

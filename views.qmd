@@ -1,5 +1,5 @@
 # Urban views
-Cities are synonymous with sights - from the classic stops to the hidden spots off the beaten track or the unusual and unexpected. My personal favourites are the quotidien: sights of everyday life. In London, it's the regimental auro of the terraced houses. In Mumbai, it's the old colonial neighbourhoods with an eclectic mix of architectural flourishes. In Wellington, it's seeing the lush green canopies crowd out the houses dotted all over the steep hillsides. 
+Cities are synonymous with sights - from the typical "must see" tourist magnets to hidden spots off the beaten track or the unusual and unexpected. My personal favourites are the quotidien: sights of everyday life. In Mumbai, it's the old colonial neighbourhoods with an eclectic mix of architectural flourishes. In London, it's the regimental rows of the terraced houses. In Wellington, it's the houses dotted all over the steep hillsides surrounded by lush greenery throughout the year. 
 
 
 ::: {layout-ncol=3}
@@ -17,17 +17,17 @@ Cities are synonymous with sights - from the classic stops to the hidden spots o
 :::
 
 ## Collages of urban character
-A collage of photographs showcasing visual congruity of a particular feature is a very simple way to go from observation to analysis. The excellent book on London's urban design, _Complexcity_ @manningComplexCityLondon2020, has several examples of collages that give the reader a sense of urban character whether it's architectural elements, streetscapes or landscapes. 
+Building a collage of photographs showcasing visual congruity of a particular feature progresses the urbanist from observation to analysis. The excellent book on London's urban design, _Complexcity_ @manningComplexCityLondon2020, has several examples of collages that give the reader a sense of urban character - whether it's architectural elements, streetscapes or landscapes. 
 
-The example of Victorian era residences around London is reproduced below. This series of photographs showcase the striking similarity in Victorian architecture without the buildings looking like clones. While the houses are stuck close together, the emphasis on large windows and reasonable setbacks from the road increases their liveability with more light and lower noise levels. 
+The example of Victorian era residences around London is reproduced below. This series of photographs showcase the striking similarity in Victorian architecture without the buildings looking like clones. While the houses are stuck close together, the architectural emphasis on large windows and setbacks from the road has increased their liveability with more light and lower noise levels. 
 
-![Collage of Victorian residences in London from @manningComplexCityLondon2020.](./assets/victorian-residences-complexcity.png)
+![Collage of Victorian residences in London from _Complexcity_ @manningComplexCityLondon2020.](./assets/victorian-residences-complexcity.png)
 
 
 ## Getting street views
 Building a visual collage of the sights we've physically visited and taken a photo of is a happy pastime once we're settled from our travels. With the power of tools like Google Street View or Mapillary, we can explore the sights without even being there. And in a similar vein, we can "snap pictures" of these places through handy APIs. 
 
-Google Street View is the most well-known and it has a helpful free API that we can access for snapping photos. All the street views in this web-bookwere built by running the function below which "makes a call" to API requesting an image with the central coordidnates and direction to be downloaded as specified in the function _arguments_. This is where the wonder of programming languages like R and Python come in. Not only can you get a series of photos easily but the hard work of connecting to the API and getting what is requested is done using code available as a package (here, it's the `googleway` package). All the user needs to do is run a few simple lines of code. 
+Google Street View has a helpful free API that we can access for armchair photography. All the street views in this web-book were built by running the function below which "makes a call" to API requesting an image with the central coordidnates and direction to be downloaded as specified in the function _arguments_. This is where the wonder of programming languages like R and Python come in. Not only can you get a series of photos easily but the hard work of connecting to the API and getting what is requested is done using code available as a package (here, it's the `googleway` package). All the user needs to do is run a few simple lines of code. 
 
 ```{r}
 #| echo: true
@@ -43,10 +43,26 @@ get_street_view(
 ```
 
 ## Remote sensing
-Remote sensing comprises satellite imagery (captured by satellites in orbit) as well as lower altitude data like LiDAR (captured by planes). These data can generate incredible urban sights (and insights) by capturing patterns and characteristics that we miss while moving around at ground level. 
+Remote sensing comprises satellite imagery (captured by satellites in orbit) as well as lower altitude data like [LiDAR](https://oceanservice.noaa.gov/facts/lidar.html#:~:text=Lidar%2C%20which%20stands%20for%20Light,variable%20distances)%20to%20the%20Earth.) (captured by planes). These data can generate incredible urban sights (and insights) by capturing patterns and characteristics that we miss while moving around at ground level. 
 
-Satellite imagery is especially powerful as it is not only a global dataset but it also captures images at different wavelengths which allow for different analyses and insights.  
+Satellite imagery is especially powerful as it is not only a global dataset but also captures images at different wavelengths. The book, _City unseen_ @setoCityUnseenNew2018, offers many jaw-dropping urban views from satellites taken at different resolutions and parts of the electromagnetic spectrum. Unlike optical images (in the visual spectrum of 400 nm to 700 nm), images taken from different parts of the spectrum like the near infra-red ( 780 nm to 2500 nm) can render valuable detail. For example, a landscape image in the infra-red can differentiate clearly between different types of vegetation. 
 
-![Paris, France image in the near infrared. Healthy vegetation is a vibrant red, barren fields are turquoise and urban areas are in blue.](./assets/paris-nir.png)
+![Image of Paris, France in the near infrared where healthy vegetation is a vibrant red, barren fields are turquoise and urban areas are in blue. Image reproduced from _City unseen_ @setoCityUnseenNew2018.](./assets/paris-nir.png)
 
+Remote sensing is increasingly used by researchers and data providers to fill in data gaps or to produce consistent global datasets. LINZ generates building footprint data from satellite imagery (see @sec-buildings) while researchers in other parts of the world are able to calculate heights of individual buildings from high resolution images @tripathyGeneratingMegacityscaleBuilding2022. 
+
+Techniques like these are incredibly useful for developing countries where urbanisation outpaces municipal capacity to collect representative urban data. Such generated urban geospatial data can be used in developing countries or researchers studying them. The World Settlement Footprint @eschWorldSettlementFootprint2022 is one such dataset providing a single, three dimensional global view of urban extent. Similarly, the [WorldPop project](https://www.worldpop.org) provides several spatial datasets (e.g. population) derived using satellity imagery. 
+
+![Global settlement footprints. The additional dimension of height represents building volume. Image reproduced from @eschWorldSettlementFootprint2022.](./assets/wsf.png)
+
+Urban rhythms are increasingly frenetic as the world adjusts and shifts to different lifestyles with changes in circumstances ranging from increasing incomes to pandemic restrictions to impacts of climate change. Satellite imagery is especially suited to our volatile world as it literally takes a snapshot at a point in time. With long running (or carefully overlapped) satellite missions, snapshots can extend back several decades allowing for temporal analysis like mapping the same space at different times. 
+
+::: {layout-ncol="2"}
+![Phoenix in 1985. Image reproduced from _City unseen_ @setoCityUnseenNew2018.](./assets/phoenix-1985.png)
+
+![Phoenix in 2016. Image reproduced from _City unseen_ @setoCityUnseenNew2018.](./assets/phoenix-2016.png)
+:::
+
+## Resources
+- `googleway` package [vignette](https://cran.r-project.org/web/packages/googleway/vignettes/googleway-vignette.html) includes a [section on creating an API key](https://cran.r-project.org/web/packages/googleway/vignettes/googleway-vignette.html#api-key) to download the streeview images. 
  
