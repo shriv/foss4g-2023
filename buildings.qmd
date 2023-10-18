@@ -11,29 +11,32 @@ source("R/centroid_bbox.R")
 ```
 
 
-The enclaves of "old Bombay" are worlds apart from the tumultuous jumble of urban form (@sec-pois) of the neighbourhood I grew up in. The ornate buildings in the tree-lined neighbourhoods of Colaba or Parsi Colony in Dadar are like an elegant elderly lady, sagging and covered in liver-spots, but her charm and beauty still take your breath away. 
+The enclaves of "old Bombay" are worlds apart from the tumultuous jumble of urban form exemplified by my neighbourhood in Navi Mumbai (@sec-pois). The ornate and eclectic buildings in the tree-lined neighbourhoods of Colaba or Parsi Colony are sagging, crumbling and past their prime but oozing charm and beauty that take your breath away. 
+
+::: {layout-ncol=2}
+![Parsi colony, Mumbai.](./assets/parsi-colony.jpeg)
+
+![Badhwar Park, Mumbai.](./assets/badhwar-park.jpeg)
+:::
+
+## Buildings anchor the city
 
 Like any city in India (and perhaps more so), Mumbai is a city of contradictions and contrast. The razzle dazzle of Bollywood make it the city of dreams but the vast droves of rural migrant workers living in slums also make it the city of inequality. 
 
-> India loves to contradict itself on everything and anything. [...] Every stereotype you know of India is completely true. At the same time the stereotypes are being broken all the time. 
-> Love is forbidden but romance is blossoming. India is poor, but it is a land of luxury. It has blazing hot summers and snows in the winter. It has the most barren deserts and the lushest jungles...
+> India loves to contradict itself on everything and anything. [...] Every stereotype you know of India is completely true. At the same time the stereotypes are being broken all the time... Love is forbidden but romance is blossoming. India is poor, but it is a land of luxury. It has blazing hot summers and snows in the winter. It has the most barren deserts and the lushest jungles...
 
 - _The Chennai Expat Guide (2018)_ @claridgeChennaiExpatGuide2018
 
-
-## Buildings anchor the city
 Buildings anchor urban form and their spread and style also dictate the aesthetics. This is even more the case for urban areas with a large number of informal dwellings (independent or as part of a slum cluster). Within slums, buildings dictate movement more than street networks via narrow alleys (“gullies” in Mumbai parlance) rather than formally managed and designed streets. 
-
-Despite a substantial slum population (last calculated ~42% in 2011 @MumbaiGreaterMumbai2011), the ingenuity of the people living in these areas exceeds imagination. Facilitated by the cheek-by-jowl proximity of labour and business, slums are economic powerhouses where no task is too small. For example, the recycling of hair waste to wigs and hair extensions is a multi-million dollar industry that employs a vast segment of entrepreneurial individuals and businesses from ragpickers (collecting discarded hair from the streets) to local waste collection depots and wig artisans @doronWasteNationGarbage2018. 
 
 > If you look over the sprawl extending out from Indian cities, you will see that there are a lot of informal developments that are not slums. The more affluent of these settlements differ in terms of their density and the materials from which they are built, and they tend to be made up of single family homes with private space. Yet the form of the settlement, the layout of streets and spaces, and the relationship of homes to each other is not so different from the poorest settlements made out of corrugated sheet and tarpaulin.
 
 - _Climax city (2019)_ @rudlinClimaxCityMasterplanning2019
 
 ::: {layout-ncol=2}
-![Shivaji Nagar.](./assets/shivaji-nagar.jpeg)
+![Shivaji Nagar. A large informal development where informal dwellings have been upgraded in areas around built streets.](./assets/shivaji-nagar.jpeg)
 
-![Mankhurd.](./assets/mankhurd.jpeg)
+![Mankhurd. Another area with extensive informal urbanisation but many dwellings are still quite raw.](./assets/mankhurd.jpeg)
 :::
 
 
@@ -197,8 +200,6 @@ p4 <- return_poche_map(ldn_bbox, "Islington, London", bldg_colour = "black", map
   ((p3  + theme(plot.margin = unit(c(0,10,0,0), "pt"))) + 
    (p4))
 ```
-
-## Learning tips
 
 
 ## Resources
