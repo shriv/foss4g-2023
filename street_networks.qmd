@@ -1,8 +1,8 @@
 # Transport networks {#sec-networks}
 
-My passion for geospatial data and then urban data science was kindled by my desire to understand my own daily life. As a citizen of Wellington, I wanted to understand how the city worked and the subjectivity of my living experiences of the city. Were the buses really that bad? Was walking both a huge energy investment as well as one of the most beautiful experiences of living in this nature-rich city?
+My passion for geospatial data and then urban data science was kindled by a desire to understand my own daily life. As a citizen of Wellington, I wanted to understand how the city worked and the subjectivity of my living experiences. Were the buses really that bad? Was walking both a huge energy investment as well as one of the most beautiful experiences of living in this nature-rich city?
 
-I regularly walk around my neighbourhood of Northland where even a 20 minute walk is a delightful multi-sensory assault. The wind dishevels my hair as I take in the visual panoramas of the city, sea and hills while by being serenaded shrieks of the kaka and the heavy whoosh of a kereru's weighty wings. 
+I regularly walk around my neighbourhood of Northland where even a 20 minute walk is a delightful multi-sensory assault. The wind dishevels my hair as I take in the visual panoramas of the city, sea and hills while being serenaded by the shrieks of kaka and the heavy whoosh of a kereru's weighty wings. 
 
 I wasn't always an enthusiastic or willing walker. It took me years to enjoy the "special" walking conditions of the hilly city I call home. In fact, it took a few years of boring walking in one of the flattest regions of the world, Cambridge (UK), for me to appreciate the rewarding experience of walking in Wellington.
 
@@ -12,7 +12,7 @@ The slow transition to becoming a walker in Wellington made me realise the chall
 
 Our street are shared by several different modes - cars, walking, cycling, buses, trains, trams and new transport technologies like e-scooters. The mobility fingerprint of a city is the way street space is shared across the transport modes @nateraExtractingMultimodalFingerprint2020. Cities like Portland and Copenhagen have streets that are pedestrian-only as well as streets that are split for pedestrians and cars (the typical configuration of road and footpath). Amsterdam, with its notable cycling culture has many streets / paths dedicated for cyclists only. By contrast, Phoenix has a majority of streets that are for cars alone!
 
-![The transport fingerprint of a city: the different ways in which transport modes share street space @nateraExtractingMultimodalFingerprint2020. Figure can be reproduced by anyone using the [open source code published alongside the paper.](./assets/multilayer-multimodal-networks.png)
+![The transport fingerprint of a city: the different ways in which transport modes share street space @nateraExtractingMultimodalFingerprint2020. Figure can be reproduced by anyone using the [open source code published alongside the paper.](https://github.com/nateraluis/Multimodal-Fingerprint)](./assets/multilayer-multimodal-networks.png)
 
 ## Getting street network data
 Openstreetmap (OSM) is the most convenient way to get _multi-modal_ transport networks. Like buildings, [LINZ also manages road data for New Zealand](https://data.linz.govt.nz/data/category/roads-and-addresses/) but simple filters based on the [extensive tag system of OSM](https://wiki.openstreetmap.org/wiki/Key:highway?uselang=en-GB) can be used to extract specific aspects of transport networks e.g. only residential roads, state highways, cycleways etc. 
@@ -82,7 +82,7 @@ Anyone familiar with Wellington knows that the city is very hilly! This poses co
 ## Urban accessibility
 Newer developments or lower price in housing starved cities are built around the fringes and thus find themselves too far from amenities making driving the only plausible option. Changing to public transit from driving has its own challenges. Access is high along routes but without an extensive network, public transit cannot beat the homogeneous access for cars. 
 
-How can we provision better access within neigbourhoods via non-driving modes to reduce our impact on the planet as well as improve our health and safety? These questions are core to our lives and wellbeing. We just need more people analysing and thinking of better options for the future.  
+How can we provision better access within neighbourhoods via non-driving modes to reduce our impact on the planet as well as improve our health and safety? These questions are core to our lives and wellbeing. We just need more people analysing and thinking of better options for the future.  
 
 
 ![Travel times to a tertiary hospitql in São Paulo by car vs. public transit. Image reproduced from _Introduction to urban accessibility_ @pereiraIntroductionUrbanAccessibility2023. Figure made with the [accessibility](https://github.com/ipeaGIT/accessibility) package.](./assets/pt-car-access-hospitals.png)
